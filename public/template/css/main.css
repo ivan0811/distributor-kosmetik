@@ -77,6 +77,7 @@ html, body{
 
 select.form-control:focus,
 input.form-control[type="text"]:focus,
+input.form-control[type="email"]:focus,
 textarea.form-control:focus,
 input[type="password"]:focus,
 input[type="file"]:focus{
@@ -244,7 +245,16 @@ a.btn-custom-sm{
     background-color: #FF9CBB;
     color: white;
     border-radius: 5px;
-    padding: 2px 15px 5px;        
+    padding: 5px 15px 5px;        
+    outline: none;
+    border: none;   
+}
+
+button.btn-custom-sm{    
+    background-color: #FF9CBB;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 15px 5px;        
     outline: none;
     border: none;   
 }
@@ -262,27 +272,50 @@ button.btn-custom{
     color: #ffffff;
 }
 
+/* a button */
+
 a.btn-custom-default{    
     background-color: #4f4f4f; 
     color: white;   
 }
 
 a.btn-custom-success{
+    color: white;
     background-color: #77DD77;
 }
 
 a.btn-custom-danger{
     background-color: #ff6961;
+    color: white;  
 }
 
 a.btn-custom-warning{
+    color: white;
     background-color: #ffd045;
 }
 
+/* hover */
+a.btn-custom-default:hover{
+    background-color: #363636;
+    color: white;  
+}
+
+a.btn-custom-success:hover{    
+    background-color:  #33de33;
+    color: white;  
+}
+
 a.btn-custom-warning:hover{
+    color: white;
     background-color: #ffc417;
 }
 
+a.btn-custom-danger:hover{
+    background-color: #ff2c21;
+    color: white;  
+}
+
+/* button btn */
 button.btn-custom-default{    
     background-color: #4f4f4f;
     color: white;       
@@ -290,18 +323,39 @@ button.btn-custom-default{
 
 button.btn-custom-success{
     background-color: #77DD77;
+    color: white;  
 }
 
 button.btn-custom-danger{
     background-color: #ff6961;
+    color: white;  
 }
 
 button.btn-custom-warning{
     background-color: #ffd045;
+    color: white;  
+}
+
+/* button btn hover */
+
+button.btn-custom-default:hover{
+    background-color: #363636;
+    color: white;  
+}
+
+button.btn-custom-success:hover{
+    background-color: #33de33;
+    color: white;  
+}
+
+button.btn-custom-warning:hover{
+    background-color: #ffc928;
+    color: white;  
 }
 
 button.btn-custom-danger:hover{
     background-color: #ff2c21;
+    color: white;  
 }
 
 .box-user-area{    
@@ -378,7 +432,9 @@ div.with-tools{
 }
 
 .tools-card-right{    
-    margin-left: auto !important;     
+    display: flex;
+    position: relative;
+    margin-left: auto !important;             
 }
 
 .custom-search-table{
@@ -393,11 +449,11 @@ div.with-tools{
     margin: 0;
 }
 
-.custom-search-table input{
+/* .custom-search-table input{
     border-color: #26AF46;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #FF9CBB;
     outline: 0 none;
-}
+} */
 
 /* .custom-card-header.with-tools > h5{
     color: white;    
@@ -502,6 +558,14 @@ button.btn-custom-sm{
     opacity: 0.7;    
 }
 
+.show-image-user{
+    width: 150px;
+    height: 150px;
+    border-radius: 180px;
+    /* background-color: #888888;     */
+    border:#dadada solid 1px;    
+}
+
 .btn-upload-img-profile input{
     display: none;    
 }
@@ -526,6 +590,25 @@ button.btn-custom-sm{
     opacity: 1;
 }
 
+.img-profile > label{
+    position: relative;
+    display: block;    
+}
+
+.img-profile > label > span{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    font-size: 35px;
+    transform: translateX(-50%) translateY(-50%);    
+    opacity: 0;
+    transition: 0.4;    
+    height: 150px;
+}
+
+.img-profile > label > span.active{
+    opacity: 1;
+}
 
 .upload-image-user:hover{
     opacity: 0.4;
@@ -661,6 +744,27 @@ footer p{
     margin: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.footer-card-btn{
+    margin-top: 30px;
+}
+
+input[type=number]:focus {
+  -moz-appearance: textfield;
+  border-color: #FF9CBB;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #FF9CBB;
+    outline: 0 none;
+}
+
+.pagination-table{
+    display: none;
+}
+
 @media only screen and (max-width: 853px){
     .login-container{
         margin-top: 40%;
@@ -709,25 +813,27 @@ footer p{
         margin: 0px 0px 0px;
         border-bottom: #888888 1px solid;    
     }    
-
+/* 
     a.btn-custom-sm{        
         text-decoration: none;        
         color: white;
         text-align: center;
         vertical-align: middle;        
         border: 1px solid transparent;     
-        padding: 2px 15px 5px;            
+        padding: 5px 15px 5px;            
         outline: none;
         border: none;   
-    }
+    } */
 
     .custom-search-table input[type="search"]{
-        display: none;
-        width: 0;
+        /* display: none; */
+        width: 80%;
     }
-    .table{
-        width: 120%;
+
+    .custom-search-table{
+        margin: 10px 0;
     }
+    
 
     .btn-upload-img-profile > label > span.active{
         opacity: 0;
