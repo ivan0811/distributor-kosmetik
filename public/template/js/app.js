@@ -75,11 +75,12 @@ $('.btn-upload-img-profile').hover(function(){
   $('div.btn-upload-img-profile > label > span').toggleClass('active');
 });
 
-$("input.search-box").keyup(function() {
+$("input.search-box").keyup(function() {  
   var value = $(this).val().toLowerCase();
-  var index = $('input').index(this);  
-  $($("tbody.search-table")[index]).find('tr').filter(function() {
-    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+  var index = $('input.search-box').index(this);    
+  $($("tbody.search-table")[index]).find('tr').filter(function() {    
+    console.log($(this));
+    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)    
   });
 });
 
@@ -87,7 +88,7 @@ for (const x of $('tbody.search-table')) {
   var table = $('tbody.search-table');  
   var lengthTable = $(x).find('tr').length;
   var i = table.index(x);
-  $($('span.total-user')[i]).text(lengthTable);    
+  $($('span.total-row')[i]).text(lengthTable);    
   addNavigationTable(i, lengthTable)
 }
 

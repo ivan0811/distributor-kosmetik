@@ -131,8 +131,4 @@ class UserController extends APIController
         $user->save();                     
         return redirect()->route('dashboard');                            
     }
-
-    function checkPassword(Request $request){
-
-    }
 }

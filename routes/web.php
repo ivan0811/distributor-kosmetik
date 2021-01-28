@@ -29,6 +29,15 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('/edit-profile', 'UserController@editProfile')->name('profile_user');
     Route::patch('/update-profile', 'UserController@updateProfile')->name('update_profile');    
 
+    Route::prefix('/toko')->group(function(){
+        Route::get('/', 'TokoController@toko')->name('toko');
+        Route::get('/create-toko', 'TokoController@createToko')->name('create_toko');
+        Route::post('/store-toko', 'TokoController@storeToko')->name('store_toko');
+        Route::get('/edit-toko/{id}', 'TokoController@editToko')->name('edit_toko');
+        Route::patch('update-toko', 'TokoController@updateToko')->name('update_toko');
+        Route::delete('/delete-toko/{id}', 'TokoController@deleteToko')->name('delete_toko');
+    });
+
     Route::group(['middleware' => 'Admin'], function () {
         //crud user        
         Route::prefix('/user')->group(function(){

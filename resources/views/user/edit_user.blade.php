@@ -48,7 +48,7 @@
                     <label class="col-sm-2 col-form-label" for="status">Status Level</label>
                     <div class="col-sm-10">
                       <select class="form-control" id="status" name="status" required>
-                        <option selected>Pilih Status Level</option>       
+                        <option value="" selected>Pilih Status Level</option>       
                         <option value="{{$user->role_id}}" selected>{{$user->role->name}}</option>
                         @foreach ($user->role->all() as $item)
                           @if ($item->id == $user->role_id)                            
@@ -86,7 +86,7 @@
                     <label class="col-sm-2 col-form-label" for="kabupaten">Kabupaten / Kota</label>
                     <div class="col-sm-10">
                       <select class="form-control" id="kabupaten" name="kabupaten" required>
-                        <option>Pilih Kabupaten / Kota</option>       
+                        <option value="">Pilih Kabupaten / Kota</option>       
                         @foreach ($getProvinsi as $item)
                             @if ($item->nama == $user->kabupaten)
                               <option data-id="{{$item->id}}" value="{{$item->nama}}" selected>{{$item->nama}}</option>
@@ -101,7 +101,7 @@
                     <label class="col-sm-2 col-form-label" for="kecamatan">Kecamatan</label>
                     <div class="col-sm-10">
                       <select class="form-control" id="kecamatan" name="kecamatan" required>
-                        <option>Pilih Kecamatan</option>                             
+                        <option value="">Pilih Kecamatan</option>                             
                         <option value="{{$user->kecamatan}}" selected>{{$user->kecamatan}}</option>
                       </select>
                     </div>                    
@@ -205,7 +205,7 @@
         });       
     }
 
-    $('button.btn_submit').on('click', function(){            
+    $('button#btn_submit').on('click', function(){            
       $('#form_user').submit();
     });        
 

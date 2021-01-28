@@ -46,7 +46,7 @@
                     <label class="col-sm-2 col-form-label" for="status">Status Level</label>
                     <div class="col-sm-10">
                       <select class="form-control" id="status" name="status" required>
-                        <option selected>Pilih Status Level</option>       
+                        <option value="" selected>Pilih Status Level</option>       
                         <option value="1">Admin</option>
                         <option value="2">Petugas</option>
                       </select>
@@ -79,7 +79,7 @@
                     <label class="col-sm-2 col-form-label" for="kabupaten">Kabupaten / Kota</label>
                     <div class="col-sm-10">
                       <select class="form-control" id="kabupaten" name="kabupaten" required>
-                        <option selected>Pilih Kabupaten / Kota</option>       
+                        <option value="" selected>Pilih Kabupaten / Kota</option>       
                         @foreach ($getProvinsi as $item) --}}
                             <option data-id="{{$item->id}}" value="{{$item->nama}}">{{$item->nama}}</option>
                          @endforeach                                                                       
@@ -90,7 +90,7 @@
                     <label class="col-sm-2 col-form-label" for="kecamatan">Kecamatan</label>
                     <div class="col-sm-10">
                       <select class="form-control" id="kecamatan" name="kecamatan" required>
-                        <option selected>Pilih Kecamatan</option>                    
+                        <option value="" selected>Pilih Kecamatan</option>                    
                       </select>
                     </div>                    
                   </div>                                                                   
