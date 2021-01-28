@@ -141,7 +141,7 @@
 <script type="text/javascript">    
     $('#kabupaten').change(function(){
         $('#kecamatan').empty();
-        $('#kecamatan').append('<option selected>Pilih Kecamatan</option>');
+        $('#kecamatan').append('<option value="" selected>Pilih Kecamatan</option>');
         $.ajax({        
             'url' : '{{route('get_kabupaten')}}',
             'type' : 'POST',        
@@ -149,10 +149,8 @@
                 '_token' : '{{csrf_token()}}',
                 'kabupaten' : $(this).find(':selected').data('id')
             },
-            'success' : function(data){
-                // console.log(data);                
-                var item = $.parseJSON(data).kecamatan;
-                // console.log(item.nama);                
+            'success' : function(data){                
+                var item = $.parseJSON(data).kecamatan;                         
                 for (const x of item) {
                     $('#kecamatan').append('<option value="'+x.nama+'">'+x.nama+'</option>');                    
                 }

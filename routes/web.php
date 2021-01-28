@@ -51,6 +51,11 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::delete('/delete-sales/{id}', 'SalesController@deleteSales')->name('delete_sales');
     });
 
+    //transaksi
+    Route::prefix('/transaksi')->group(function(){
+        Route::get('/', 'TransaksiController@transaksi')->name('transaksi');        
+    });
+
     //middleware auth admin
     Route::group(['middleware' => 'Admin'], function () {
         //crud user        

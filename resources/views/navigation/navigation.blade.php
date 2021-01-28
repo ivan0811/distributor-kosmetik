@@ -51,6 +51,14 @@
                           Transaksi
                         </p>
                       </a>
+                    </li> 
+                    <li class="navbar-item">                                            
+                      <a href="form.html" class="btn-custom-menu">
+                        <span class="fa fa-cash-register"></span>
+                        <p class="custom-menu-text">  
+                          Pesanan
+                        </p>
+                      </a>
                     </li>      
                     <li class="navbar-item {{Request::segment(1) == 'toko' ? 'active' : ''}}">                                            
                       <a href="{{route('toko')}}" class="btn-custom-menu ">

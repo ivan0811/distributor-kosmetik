@@ -15,14 +15,17 @@ function mediaScreen(screenSize){
     $('#poho_password').parent().removeClass('justify-content-end');
     $('#poho_password').parent().addClass('pb-2 pt-1');
     $('#logout_button').addClass("btn-block");    
-    $('section.content').css('width', screenSize-20+'px')
+    $('section.content').css('width', screenSize-20+'px');
     $('.custom-search-table').parent().removeClass('ml-auto');
   }else{
     $('#poho_password').parent().addClass('justify-content-end');
     $('#poho_password').parent().removeClass('pb-2 pt-1');
     $('#logout_button').removeClass("btn-block");
-    $('section.content').css('width', 'auto');
-    $('.custom-search-table').parent().addClass('ml-auto');
+    $('section.content').css('width', 'auto');    
+    $($('form.custom-search-table')[$('div.left-search').index()]).css('margin', 0);
+    if(!$('.custom-search-table').parent().hasClass('left-search')){      
+      $('.custom-search-table').parent().addClass('ml-auto');
+    }    
   }
 }
 
@@ -78,8 +81,7 @@ $('.btn-upload-img-profile').hover(function(){
 $("input.search-box").keyup(function() {  
   var value = $(this).val().toLowerCase();
   var index = $('input.search-box').index(this);    
-  $($("tbody.search-table")[index]).find('tr').filter(function() {    
-    console.log($(this));
+  $($("tbody.search-table")[index]).find('tr').filter(function() {        
     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)    
   });
 });
