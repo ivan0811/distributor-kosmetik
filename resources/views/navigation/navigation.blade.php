@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+    <title>Sinar Jaya Kosmetik | @yield('title')</title>
+    <link rel="shortcut icon" href="{{asset('template/img/logo_favicon.png')}}">
     <link rel="stylesheet" href="{{asset('template/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('template/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('template/css/layout.css')}}">
@@ -59,8 +60,8 @@
                         </p>
                       </a>
                     </li>     
-                    <li class="navbar-item">                                            
-                      <a href="form.html" class="btn-custom-menu">
+                    <li class="navbar-item {{Request::segment(1) == 'sales' ? 'active' : ''}}">                                            
+                      <a href="{{route('sales')}}" class="btn-custom-menu">
                         <span class="fa fa-people-carry"></span>
                         <p class="custom-menu-text">  
                           Sales
