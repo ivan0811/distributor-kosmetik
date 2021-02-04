@@ -53,7 +53,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     //transaksi
     Route::prefix('/transaksi')->group(function(){
-        Route::get('/', 'TransaksiController@transaksi')->name('transaksi');        
+        Route::get('/', 'TransaksiController@transaksi')->name('transaksi');   
+        Route::get('/create-transaksi', 'TransaksiController@createTransaksi')->name('create_transaksi');
     });
 
     //middleware auth admin

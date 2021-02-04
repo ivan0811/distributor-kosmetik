@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('template/css/layout.css')}}">
     <link rel="stylesheet" href="{{asset('template/css/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('template/css/Chart.min.css')}}">
+    <link rel="stylesheet" href="{{asset('template/css/bootstrap-select.min.css')}}">
 </head>
 <style>
   .navbar-nav{
@@ -44,8 +45,8 @@
                         </p>                        
                         </a>
                     </li>
-                    <li class="navbar-item">                                            
-                      <a href="form.html" class="btn-custom-menu">
+                    <li class="navbar-item {{Request::segment(1) == 'transaksi' ? 'active' : ''}}">                                            
+                      <a href="{{route('transaksi')}}" class="btn-custom-menu">
                         <span class="fa fa-cash-register"></span>
                         <p class="custom-menu-text">  
                           Transaksi
@@ -162,6 +163,7 @@
       <script src="{{asset('template/js/app.js')}}"></script>
       <script src="{{asset('template/js/Chart.min.js')}}"></script>
       <script src="{{asset('template/js/sweetalert2.all.min.js')}}"></script>            
+      <script src="{{asset('template/js/bootstrap-select.min.js')}}"></script>
       @if (session('status'))
         {!!session('status')!!}
       @endif

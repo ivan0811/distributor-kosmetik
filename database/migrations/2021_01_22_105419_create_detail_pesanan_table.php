@@ -15,15 +15,15 @@ class CreateDetailPesananTable extends Migration
     {
         Schema::create('detail_pesanan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('no_order')->unsigned();
+            $table->bigInteger('no_pesanan')->unsigned();
             $table->bigInteger('barang_id')->unsigned();            
             $table->integer('satuan');                        
             $table->integer('qty');
             $table->integer('total_harga');
             $table->timestamps();
 
-            $table->foreign('no_order')
-            ->references('no_order')
+            $table->foreign('no_pesanan')
+            ->references('no_pesanan')
             ->on('pesanan')
             ->onDelete('cascade')
             ->onUpdate('cascade');

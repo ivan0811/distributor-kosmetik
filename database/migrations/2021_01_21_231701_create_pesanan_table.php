@@ -14,7 +14,7 @@ class CreatePesananTable extends Migration
     public function up()
     {
         Schema::create('pesanan', function (Blueprint $table) {
-            $table->bigIncrements('no_order');            
+            $table->bigIncrements('no_pesanan');            
             $table->bigInteger('toko_id')->unsigned();
             $table->bigInteger('sales_id')->unsigned();            
             $table->integer('total_barang');            

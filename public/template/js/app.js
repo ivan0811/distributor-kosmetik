@@ -188,3 +188,23 @@ function setPageTableActive(i, pagination, indexPage){
       setPaginationTable($($('table.table')[i]).find('tbody > tr'), $($('tbody.search-table')[i]).find('tr').length, indexPage);
 }
 
+var arrCustomSelect = [];
+
+// setTimeout(function(){
+//   setSelected();  
+// }, 300);
+
+function setSelected(){
+  $('select.custom-select').parent().find('button').css({
+    "border" : "1px solid #ced4da",
+    "background-color" : "#fff",
+    "outline" : "0 none"    
+  });    
+  $('select.custom-select').parent().find('button').removeClass('btn-light').addClass('custom-button-select');
+  $('select.custom-select').parent().find('div').css({"outline" : "0 none"});
+  
+}
+
+$('select.custom-select').parent().click(function(){
+  $(this).css({"outline" : "0 none"});
+});

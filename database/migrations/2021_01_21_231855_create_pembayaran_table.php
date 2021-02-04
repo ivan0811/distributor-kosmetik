@@ -18,7 +18,8 @@ class CreatePembayaranTable extends Migration
             $table->string('norek');
             $table->bigInteger('no_order')->unsigned();            
             $table->bigInteger('jumlah_pembayaran');
-            $table->enum('status_pembayaran', ['CASH', 'TRANSFER']);
+            $table->enum('metode_pembayaran', ['CASH', 'TRANSFER']);
+            $table->enum('status_pembayaran', ['LUNAS', 'BELUM LUNAS']);
             $table->date('tanggal_pembayaran');
             $table->timestamps();
 
