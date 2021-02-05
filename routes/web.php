@@ -51,6 +51,13 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::delete('/delete-sales/{id}', 'SalesController@deleteSales')->name('delete_sales');
     });
 
+    //crud barang
+    Route::prefix('/barang')->group(function(){
+        Route::get('/', 'BarangController@barang')->name('barang');
+        Route::get('/create-barang', 'BarangController@createBarang')->name('create_barang');
+        Route::post('/store-barang', 'BarangController@storeBarang')->name('store_barang');
+    });
+
     //middleware auth admin
     Route::group(['middleware' => 'Admin'], function () {
         //crud user        
