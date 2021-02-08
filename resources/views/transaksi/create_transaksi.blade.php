@@ -27,29 +27,29 @@
               <div class="form-row">                
                 <div class="col-md-6 mb-3">
                   <label for="">No Pesanan</label>
-                  <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap" required>                    
+                  <input type="text" name="nama" class="form-control" id="nama" placeholder="No Pesanan" required>                    
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="">Nama Toko</label>
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Nama Toko" aria-label="Recipient's username" aria-describedby="button-addon2" readonly required>
                     <div class="input-group-append">
-                      <button class="btn btn-outline-accent" type="button" data-toggle="modal" data-target="#pilih_toko">PIlih Toko</button>
+                      <button class="btn btn-accent" type="button" data-toggle="modal" data-target="#pilih_toko">PIlih Toko</button>
                    </div>
                   </div>           
-                </div>                
+                </div>                                
+                <div class="col-md-6 mb-3">
+                  <label for="">Tanggal Transaksi</label>
+                  <input type="datetime-local" class="form-control" id="transaction_date"> 
+                </div>      
                 <div class="col-md-6 mb-3">
                   <label for="">Nama Sales</label>
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Nama Sales" aria-label="Recipient's username" aria-describedby="button-addon2" readonly required>
                     <div class="input-group-append">
-                      <button class="btn btn-outline-accent" type="button" data-toggle="modal" data-target="#pilih_sales">Pilih Sales</button>
+                      <button class="btn btn-accent" type="button" data-toggle="modal" data-target="#pilih_sales">Pilih Sales</button>
                    </div>
                   </div>
-                </div>      
-                <div class="col-md-6 mb-3">
-                  <label for="">Tanggal Transaksi</label>
-                  <input type="datetime-local" class="form-control"> 
                 </div>      
               </div>                                                                                                                                                                     
                 </div>                                                                                                                      
@@ -100,17 +100,7 @@
               <th scope="col" width="170px">Aksi</th>
             </tr>
           </thead>
-          <tbody class="search-table">
-            {{-- @php
-                $no = 1  
-              @endphp
-              @foreach ($users as $key => $item)
-              @if ($item->id == 1)
-                @continue  
-              @endif
-              @if (\Auth::user()->id == $item->id)
-                  @continue
-              @endif --}}
+          <tbody class="search-table">                      
             <tr>                                         
                 <th scope="row"></th>
                 <td></td>                
@@ -136,8 +126,7 @@
                           <button type="button" class="btn btn-sm btn-custom-danger" data-id="" data-toggle="modal"><span class="fa fa-trash"></span></button>                      
                     </div>                                      
                 </td>
-              </tr>                                         
-              {{-- @endforeach               --}}
+              </tr>                                                       
           </tbody>
         </table>
       </div>
@@ -173,7 +162,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                   <label for="">Tanggal Pembayaran</label>
-                  <input type="datetime-local" class="form-control"> 
+                  <input type="datetime-local" class="form-control" id="pay_date"> 
                 </div>   
                 <div class="col-md-6 mb-3">
                   <label for="">Metode Pembayaran</label>
@@ -343,11 +332,10 @@
               </ul> 
 
             <div class="custom-card-body-table table-responsive" style="max-height: 440px;">
-                <table class="table">
+                <table class="table table-custom-hover radio-select-table">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Pilih</th>
+                      <th scope="col">#</th>                      
                       <th scope="col">Nama Sales</th>
                       <th scope="col">Jenis Kelamin</th>
                       <th scope="col">Kabupaten / kota</th>
@@ -356,59 +344,23 @@
                     </tr>
                   </thead>
                   <tbody class="search-table">
-                    <tr>
-                        <td>1</td>
-                        <td><input type="radio"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    {{-- @php
-                        $no = 1  
-                      @endphp
-                      @foreach ($users as $key => $item)
-                      @if ($item->id == 1)
-                        @continue  
-                      @endif
-                      @if (\Auth::user()->id == $item->id)
-                          @continue
-                      @endif
-                    <tr>                                         
-                        <th scope="row">{{$no++}}</th>
-                        <td>{{$item->name}}</td>                
-                        <td>{{$item->email}}</td>                
-                        <td>{{$item->username}}</td>
-                        <td>{{$item->no_hp}}</td>   
-                        <td>{{$item->role->name}}</td>                             
-                        <td>                  
-                            <form action="{{route('delete_user', $item->id)}}" method="POST" id="delete_user{{$item->id}}">
-                              {{ csrf_field() }}
-                              {{ method_field('DELETE')}}                      
-                              <div class="d-flex">
-                              <div class="p-1">
-                                <a href="{{route('show_user', $item->id)}}" class="btn btn-info"><span class="fa fa-eye"></span></a>
-                              </div>                                  
-                              <div class="p-1">
-                                  <a href="{{route('edit_user', $item->id)}}" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
-                              </div>
-                              <div class="p-1">
-                                  <button type="button" class="btn btn-custom-danger delete_confirm" data-id="{{$item->id}}" data-toggle="modal"><span class="fa fa-trash"></span></button>
-                              </div>
-                            </div>                  
-                            </form>                                                     
-                        </td>
-                      </tr>                                         
-                      @endforeach               --}}
+                    @php
+                        $no = 1
+                    @endphp
+                    @foreach ($sales as $item)
+                      <tr>
+                        <td>{{$no}}<input type="radio" name="toko" class="radio-selectable"></td>                        
+                        <td>{{$item->nama}}</td>
+                        <td>{{$item->jk}}</td>
+                        <td>{{$item->kabupaten}}</td>
+                        <td>{{$item->kecamatan}}</td>
+                        <td>{{$item->alamat}}</td>
+                      </tr>
+                    @endforeach                                  
                   </tbody>
                 </table>
               </div>        
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary">Pilih</button>
-        </div>
+        </div>        
       </div>
     </div>
   </div>
@@ -417,7 +369,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Toko</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Pilih Toko</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -446,11 +398,10 @@
               </ul> 
               
             <div class="custom-card-body-table table-responsive" style="max-height: 440px;">
-                <table class="table">
+                <table class="table table-custom-hover radio-select-table">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Pilih</th>
+                      <th scope="col">#</th>                      
                       <th scope="col">Nama Toko</th>                      
                       <th scope="col">Nomor HP</th>
                       <th scope="col">Kabupaten / kota</th>
@@ -459,68 +410,45 @@
                     </tr>
                   </thead>
                   <tbody class="search-table">
-                    <tr>
-                        <td>1</td>
-                        <td><input type="radio"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    @php
+                      $no = 1  
+                    @endphp
+                    @foreach ($toko as $item)                    
+                    <tr>                        
+                      <td>
+                        {{$no++}}
+                        <input type="radio" name="toko" class="radio-selectable">
+                      </td>                      
+                      <td>{{$item->nama}}</td>
+                      <td>{{$item->no_hp}}</td>
+                      <td>{{$item->kabupaten}}</td>
+                      <td>{{$item->kecamatan}}</td>                      
+                      <td>{{$item->alamat}}</td>
                     </tr>
-                    {{-- @php
-                        $no = 1  
-                      @endphp
-                      @foreach ($users as $key => $item)
-                      @if ($item->id == 1)
-                        @continue  
-                      @endif
-                      @if (\Auth::user()->id == $item->id)
-                          @continue
-                      @endif
-                    <tr>                                         
-                        <th scope="row">{{$no++}}</th>
-                        <td>{{$item->name}}</td>                
-                        <td>{{$item->email}}</td>                
-                        <td>{{$item->username}}</td>
-                        <td>{{$item->no_hp}}</td>   
-                        <td>{{$item->role->name}}</td>                             
-                        <td>                  
-                            <form action="{{route('delete_user', $item->id)}}" method="POST" id="delete_user{{$item->id}}">
-                              {{ csrf_field() }}
-                              {{ method_field('DELETE')}}                      
-                              <div class="d-flex">
-                              <div class="p-1">
-                                <a href="{{route('show_user', $item->id)}}" class="btn btn-info"><span class="fa fa-eye"></span></a>
-                              </div>                                  
-                              <div class="p-1">
-                                  <a href="{{route('edit_user', $item->id)}}" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
-                              </div>
-                              <div class="p-1">
-                                  <button type="button" class="btn btn-custom-danger delete_confirm" data-id="{{$item->id}}" data-toggle="modal"><span class="fa fa-trash"></span></button>
-                              </div>
-                            </div>                  
-                            </form>                                                     
-                        </td>
-                      </tr>                                         
-                      @endforeach               --}}
+                    @endforeach                    
+                    
                   </tbody>
                 </table>
               </div>        
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        {{-- <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
           <button type="button" class="btn btn-primary">Pilih</button>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>
 @endsection
 @push('scripts')
     <script>      
+    var updateDateTransaction = true;
+    var updateDatePay = true;
+    var date = new Date();    
+    updateDate(updateDateTransaction, updateDatePay);
+
       $(function() {
         $('.selectpicker').selectpicker();
-      });    
+      });          
       
       $('.transfer').hide();
 
@@ -530,5 +458,28 @@
           $('.transfer').show();
         }
       });
+
+      setInterval(() => {
+        date = new Date();
+        updateDate(updateDateTransaction, updateDatePay);
+      }, 1000);      
+
+      function updateDate(transaction, pay){
+        var getDate = date.getDate().toString();        
+        var getMonth = date.getMonth().toString();
+        var getHours = date.getHours().toString();
+        var getMinutes = date.getMinutes().toString();                
+        if(getDate.length == 1) getDate = '0' + getDate;
+        if(getMonth.length == 1) getMonth = '0' + getMonth;
+        if(getHours.length == 1) getHours = '0' + getHours;
+        if(getMinutes.length == 1) getMinutes = '0' + getMinutes;
+        var dateNow = date.getFullYear() + '-' + getMonth + '-' + getDate + 'T' + getHours + ':' + getMinutes;
+        if(transaction) $('#transaction_date').val(dateNow);        
+        if(pay) $('#pay_date').val(dateNow);
+      }
+
+      // for (const item of $('div.modal')){
+      //   $(item)
+      // }
     </script>
 @endpush

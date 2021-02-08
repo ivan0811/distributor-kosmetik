@@ -58,7 +58,26 @@
                         </div>                                  
                       </div>                     
                     </div>                    
-                  </div>                                                                                                     
+                  </div>       
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="kabupaten">Kabupaten / Kota</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="kabupaten" name="kabupaten" required>
+                        <option value="" selected>Pilih Kabupaten / Kota</option>       
+                        @foreach ($getProvinsi as $item) --}}
+                            <option data-id="{{$item->id}}" value="{{$item->nama}}">{{$item->nama}}</option>
+                         @endforeach                                                                       
+                      </select>
+                    </div>                    
+                  </div>                                                               
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="kecamatan">Kecamatan</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="kecamatan" name="kecamatan" required>
+                        <option value="" selected>Pilih Kecamatan</option>                    
+                      </select>
+                    </div>                    
+                  </div>                                                                                      
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="alamat">Alamat</label>
                     <div class="col-sm-10">
@@ -75,3 +94,31 @@
     </div>
   </div>        
 @endsection
+
+@push('scripts')
+    <script>
+        $('#kabupaten').change(function(){
+        $('#kecamatan').empty();
+        $('#kecamatan').append('<option selected>Pilih Kecamatan</option>');
+        $.ajax({        
+            'url' : '{{route('get_kabupaten')}}',
+            'type' : 'POST',        
+            'data' : {
+                '_token' : '{{csrf_token()}}',
+                'kabupaten' : $(this).find(':selected').data('id')
+            },
+            'success' : function(data){
+                // console.log(data);                
+                var item = $.parseJSON(data).kecamatan;
+                // console.log(item.nama);                
+                for (const x of item) {
+                    $('#kecamatan').append('<option value="'+x.nama+'">'+x.nama+'</option>');                    
+                }
+            },
+            'error' : function(data){
+                console.log(data);
+            }
+        });        
+    });         
+    </script>
+@endpush

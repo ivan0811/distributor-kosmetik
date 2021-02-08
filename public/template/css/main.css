@@ -86,6 +86,13 @@ input[type="file"]:focus{
     outline: 0 none;
 }
 
+input.form-control[type="text"]:read-only,
+input.form-control[type="number"]:read-only{
+    background-color: #f3f5f9;
+}
+
+
+
 input[type="checkbox"]:checked{
     background-color: #FF6B99;    
 }
@@ -217,12 +224,12 @@ button.btn-custom{
 }
 
 button.btn-accent{
-    background-color: #FF9CBB;
+    background-color: #ff5f92;
     color: white;
 }
 
 button.btn-accent:hover{
-    background-color: #ff5f92;
+    background-color: #FF9CBB;    
     color: white;
 }
 
@@ -835,6 +842,17 @@ button.dropdown-toggle  .custom-button-select{
 
 .dropdown-item.active, .dropdown-item:active{
     background-color: #FF9CBB;
+}
+
+.radio-select-table input.radio-selectable{
+    width: 0;
+    height: 0;    
+}
+
+table.table-custom-hover > tbody > tr:hover{
+    background-color: #FF9CBB;
+    color: #fff;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 853px){

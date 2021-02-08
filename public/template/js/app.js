@@ -208,3 +208,11 @@ function setSelected(){
 $('select.custom-select').parent().click(function(){
   $(this).css({"outline" : "0 none"});
 });
+
+for (const item of $('table.radio-select-table')) {
+  $(item).find('tbody > tr').click(function(){      
+    $(item).find('tbody > tr').css({'background-color' : '', 'color' : ''});    
+    $(this).find('input.radio-selectable').attr('checked', true);
+    $(this).css({'background-color' : '#FF9CBB', 'color' : '#fff'});        
+  });
+}

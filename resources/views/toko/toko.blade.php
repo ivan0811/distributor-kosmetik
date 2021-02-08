@@ -41,7 +41,9 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Nama Toko</th>              
-              <th scope="col">Nomor HP</th>                                           
+              <th scope="col">Nomor HP</th>       
+              <th scope="col">Kabupaten / Kota</th>                                                         
+              <th scope="col">kecamatan</th>       
               <th scope="col">Alamat</th>
               <th scope="col" width="170px">Aksi</th>
             </tr>
@@ -55,9 +57,9 @@
                 <th scope="row">{{$no++}}</th>
                 <td>{{$item->nama}}</td>                
                 <td>{{$item->no_hp}}</td>                
-                <td>Kabupaten : {{$item->kabupaten}}  <br>
-                    Kecamatan :  {{$item->kecamatan}} <br>
-                    Alamat lengkap :  {{$item->alamat}}</td>                                                         
+                <td>{{$item->kabupaten}}</td>
+                <td>{{$item->kecamatan}}</td>
+                <td>{{$item->alamat}}</td>                                                         
                 <td>                  
                     <form action="{{route('delete_toko', $item->id)}}" method="POST" id="form_delete{{$item->id}}">
                       {{ csrf_field() }}

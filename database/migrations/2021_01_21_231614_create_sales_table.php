@@ -18,6 +18,7 @@ class CreateSalesTable extends Migration
             $table->string('nama');
             $table->string('no_hp');
             $table->char('jk', 1);
+            $table->enum('status', ['ada', 'libur']);
             $table->string('kabupaten');
             $table->string('kecamatan');
             $table->text('alamat');

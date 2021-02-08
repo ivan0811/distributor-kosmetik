@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Sales;
 
-class SalesController extends MessageController
+class SalesController extends APIController
 {
     function sales(){
         $sales = Sales::all();
@@ -14,7 +14,8 @@ class SalesController extends MessageController
     }
     
     function createSales(){
-        return view('sales.create_sales');
+        $getProvinsi = $this->getProvinsi;      
+        return view('sales.create_sales', compact('getProvinsi'));
     }
 
     function storeSales(Request $request){
@@ -22,6 +23,8 @@ class SalesController extends MessageController
             'nama' => $request->nama,
             'no_hp' => $request->no_hp,
             'jk' => $request->jk,
+            'kabupaten' => $request->kabupaten,
+            'kecamatan' => $request->kecamatan,
             'alamat' => $request->alamat
         ]);
         $toast = $this->successToast('data sales berhasil di tambahkan');                                        
@@ -30,8 +33,9 @@ class SalesController extends MessageController
 
     function editSales($id){
         $sales = Sales::findOrFail($id);        
+        $getProvinsi = $this->getProvinsi;
         $confirmModal = $this->saveConfirm('sales', route('sales'), 'confirm_modal', 'btn_submit');        
-        return view('sales.edit_sales', compact('sales', 'getProvinsi', 'confirmModal'));
+        return view('sales.edit_sales', compact('sales', 'getProvinsi', 'confirmModal', 'getProvinsi'));
     }
 
     function updateSales(Request $request){
@@ -39,6 +43,8 @@ class SalesController extends MessageController
         $sales->nama = $request->nama;
         $sales->no_hp = $request->no_hp;
         $sales->jk = $request->jk;
+        $sales->kabupaten = $request->kabupaten;
+        $sales->kecamatan = $request->kecamatan;        
         $sales->alamat = $request->alamat;        
         $sales->save();
 

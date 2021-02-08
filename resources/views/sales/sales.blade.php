@@ -43,6 +43,8 @@
               <th scope="col">Nama Sales</th>              
               <th scope="col">Nomor HP</th>                                           
               <th scope="col">Jenis Kelamin</th>
+              <th scope="col">Kabupaten / Kota</th>
+              <th scope="col">Kecamatan</th>
               <th scope="col">Alamat</th>
               <th scope="col" width="170px">Aksi</th>
             </tr>
@@ -55,7 +57,9 @@
             <tr>                                         
                 <th scope="row">{{$no++}}</th>
                 <td>{{$item->nama}}</td>                
-                <td>{{$item->no_hp}}</td>       
+                <td>{{$item->no_hp}}</td>     
+                <td>{{$item->kabupaten}}</td>     
+                <td>{{$item->kecamatan}}</td>     
                 <td>{{$item->jk}}</td>         
                 <td>{{$item->alamat}}</td>                                                         
                 <td>                  
