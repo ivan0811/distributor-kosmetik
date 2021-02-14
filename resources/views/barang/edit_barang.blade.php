@@ -1,15 +1,15 @@
 @extends('navigation.navigation')
 @section('title')
-    Toko
+    Barang
 @endsection
 @section('header')
-    Edit Toko
+    Edit Barang
 @endsection
 @section('content')                         
   <div class="col-md-12">
     <div class="custom-card">                  
       <div class="custom-card-header text-clear">
-        <h5>Form Edit Toko</h5>                    
+        <h5>Form Edit Barang</h5>                    
       </div>               
       @if ($errors->any())
           <div class="alert alert-danger">
@@ -21,51 +21,157 @@
           </div>
       @endif                       
       <div class="custom-card-body">                                                                  
-          <form action="{{route('update_toko')}}" id="form_toko" method="POST">       
+          <form action="{{route('update_barang')}}" id="form_barang" method="POST">       
             {{ csrf_field() }}
             {{ method_field('PATCH')}}
-            <input type="hidden" name="id" value="{{$toko->id}}">
+            <input type="hidden" name="id" value="{{$barang->id}}">
             <div class="container-fluid">
                 <div class="form-group row">                          
-                  <label class="col-sm-2 col-form-label" for="nama">Nama Toko</label>
+                  <label class="col-sm-2 col-form-label" for="nama">Nama Barang</label>
                   <div class="col-sm-10">
-                    <input type="text" name="nama" class="form-control" value="{{$toko->nama}}" id="nama" placeholder="Nama Toko" required>                    
+                    <input type="text" name="nama" class="form-control" value="{{$barang->nama}}" id="nama" placeholder="Nama Barang" required>                    
                   </div>                  
                 </div>                      
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="no_hp">Nomor HP</label> 
+                    <label class="col-sm-2 col-form-label" for="stok">Stok</label> 
                     <div class="col-sm-10">
-                      <input type="number" name="no_hp" value="{{$toko->no_hp}}" class="form-control" id="no_hp" placeholder="Nomor HP Yang Aktif" required>
+                      <input type="number" name="stok" value="{{$barang->stok}}" class="form-control" id="stok" placeholder="Stok yang tersedia" required>
                     </div>                  
                   </div>                                                               
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="kabupaten">Kabupaten / Kota</label>
+                    <label class="col-sm-2 col-form-label" for="harga_jual">Harga Jual</label> 
                     <div class="col-sm-10">
-                      <select class="form-control" id="kabupaten" name="kabupaten" required>
-                        <option value="">Pilih Kabupaten / Kota</option>       
-                        @foreach ($getProvinsi as $item)
-                            @if ($item->nama == $toko->kabupaten)
-                              <option data-id="{{$item->id}}" value="{{$item->nama}}" selected>{{$item->nama}}</option>
-                              @continue    
-                            @endif                        
-                              <option data-id="{{$item->id}}" value="{{$item->nama}}">{{$item->nama}}</option>
-                         @endforeach                                                                       
-                      </select>
+                      <input type="number" name="harga_jual" value="{{$barang->harga_jual}}" class="form-control" id="harga_pabrik" placeholder="Masukkan Harga Jual" required>
+                    </div>                  
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="harga_pabrik">Harga Pabrik</label> 
+                    <div class="col-sm-10">
+                      <input type="number" name="harga_pabrik" value="{{$barang->harga_pabrik}}" class="form-control" id="harga_pabrik" placeholder="Masukkan Harga Pabrik" required>
+                    </div>                  
+                  </div>                                                                                                                                                                                        
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="discount">Discount</label>
+                    <div class="col-sm-10">
+                      <textarea name="discount" id="" placeholder="Masukkan Discount" class="form-control" required>{{$barang->discount}}</textarea>
                     </div>                    
+                  </div>                                                                                                         
+                </div>                                                                           
+                <div class="footer-card-btn">                
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#confirm_modal">Kembali</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                  </div>                                         
+          </form>                                                
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="custom-card">                  
+      <div class="custom-card-header text-clear">
+        <h5>Form Edit Barang Masuk</h5>                    
+      </div>               
+      @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif                       
+      <div class="custom-card-body">                                                                  
+          <form action="{{route('update_barang')}}" id="form_barang" method="POST">       
+            {{ csrf_field() }}
+            {{ method_field('PATCH')}}
+            <input type="hidden" name="id" value="{{$barang->id}}">
+            <div class="container-fluid">
+                <div class="form-group row">                          
+                  <label class="col-sm-2 col-form-label" for="nama">Nama Barang</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="nama" class="form-control" value="{{$barang->nama}}" id="nama" placeholder="Nama Barang" required>                    
+                  </div>                  
+                </div>                      
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="stok">Stok</label> 
+                    <div class="col-sm-10">
+                      <input type="number" name="stok" value="{{$barang->stok}}" class="form-control" id="stok" placeholder="Stok yang tersedia" required>
+                    </div>                  
                   </div>                                                               
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="kecamatan">Kecamatan</label>
+                    <label class="col-sm-2 col-form-label" for="harga_jual">Harga Jual</label> 
                     <div class="col-sm-10">
-                      <select class="form-control" id="kecamatan" name="kecamatan" required>
-                        <option value="">Pilih Kecamatan</option>                             
-                        <option value="{{$toko->kecamatan}}" selected>{{$toko->kecamatan}}</option>
-                      </select>
-                    </div>                    
-                  </div>                                                                    
+                      <input type="number" name="harga_jual" value="{{$barang->harga_jual}}" class="form-control" id="harga_pabrik" placeholder="Masukkan Harga Jual" required>
+                    </div>                  
+                  </div>
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="alamat">Alamat</label>
+                    <label class="col-sm-2 col-form-label" for="harga_pabrik">Harga Pabrik</label> 
                     <div class="col-sm-10">
-                      <textarea name="alamat" id="" placeholder="Alamat Lengkap" class="form-control" required>{{$toko->alamat}}</textarea>
+                      <input type="number" name="harga_pabrik" value="{{$barang->harga_pabrik}}" class="form-control" id="harga_pabrik" placeholder="Masukkan Harga Pabrik" required>
+                    </div>                  
+                  </div>                                                                                                                                                                                        
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="discount">Discount</label>
+                    <div class="col-sm-10">
+                      <textarea name="discount" id="" placeholder="Masukkan Discount" class="form-control" required>{{$barang->discount}}</textarea>
+                    </div>                    
+                  </div>                                                                                                         
+                </div>                                                                           
+                <div class="footer-card-btn">                
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#confirm_modal">Kembali</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                  </div>                                         
+          </form>                                                
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="custom-card">                  
+      <div class="custom-card-header text-clear">
+        <h5>Form Edit Barang Keluar</h5>                    
+      </div>               
+      @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif                       
+      <div class="custom-card-body">                                                                  
+          <form action="{{route('update_barang')}}" id="form_barang" method="POST">       
+            {{ csrf_field() }}
+            {{ method_field('PATCH')}}
+            <input type="hidden" name="id" value="{{$barang->id}}">
+            <div class="container-fluid">
+                <div class="form-group row">                          
+                  <label class="col-sm-2 col-form-label" for="nama">Nama Barang</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="nama" class="form-control" value="{{$barang->nama}}" id="nama" placeholder="Nama Barang" required>                    
+                  </div>                  
+                </div>                      
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="stok">Stok</label> 
+                    <div class="col-sm-10">
+                      <input type="number" name="stok" value="{{$barang->stok}}" class="form-control" id="stok" placeholder="Stok yang tersedia" required>
+                    </div>                  
+                  </div>                                                               
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="harga_jual">Harga Jual</label> 
+                    <div class="col-sm-10">
+                      <input type="number" name="harga_jual" value="{{$barang->harga_jual}}" class="form-control" id="harga_pabrik" placeholder="Masukkan Harga Jual" required>
+                    </div>                  
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="harga_pabrik">Harga Pabrik</label> 
+                    <div class="col-sm-10">
+                      <input type="number" name="harga_pabrik" value="{{$barang->harga_pabrik}}" class="form-control" id="harga_pabrik" placeholder="Masukkan Harga Pabrik" required>
+                    </div>                  
+                  </div>                                                                                                                                                                                        
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="discount">Discount</label>
+                    <div class="col-sm-10">
+                      <textarea name="discount" id="" placeholder="Masukkan Discount" class="form-control" required>{{$barang->discount}}</textarea>
                     </div>                    
                   </div>                                                                                                         
                 </div>                                                                           

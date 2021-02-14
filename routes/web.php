@@ -51,11 +51,24 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::delete('/delete-sales/{id}', 'SalesController@deleteSales')->name('delete_sales');
     });
 
+    //crud pemasok
+    Route::prefix('/pemasok')->group(function(){
+        Route::get('/', 'PemasokController@pemasok')->name('pemasok');
+        Route::get('/create-pemasok', 'PemasokController@createPemasok')->name('create_pemasok');
+        Route::post('/store-pemasok', 'PemasokController@storePemasok')->name('store_pemasok');
+        Route::get('/edit-pemasok/{kode_pabrik}', 'PemasokController@editPemasok')->name('edit_pemasok');
+        Route::patch('/update-pemasok', 'PemasokController@updatePemasok')->name('update_pemasok');
+        Route::delete('/delete-pemasok/{kode_pabrik}', 'PemasokController@deletePemasok')->name('delete_pemasok'); 
+    });
+
     //crud barang
     Route::prefix('/barang')->group(function(){
         Route::get('/', 'BarangController@barang')->name('barang');
         Route::get('/create-barang', 'BarangController@createBarang')->name('create_barang');
         Route::post('/store-barang', 'BarangController@storeBarang')->name('store_barang');
+        Route::get('/edit-barang/{id}', 'BarangController@editBarang')->name('edit_barang');
+        Route::patch('/update-barang', 'BarangController@updateBarang')->name('update_barang');
+        Route::delete('/delete-barang/{id}', 'BarangController@deleteBarang')->name('delete_barang');
     });
 
     //middleware auth admin

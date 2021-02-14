@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Barang;
+use App\Satuan;
 
 class BarangController extends MessageController
 {
@@ -13,31 +14,32 @@ class BarangController extends MessageController
         return view('barang.barang', compact('barang', 'confirmModal'));
     }
 
-    function createBarang(){        
-        $getProvinsi = $this->getProvinsi;            
-        return view('barang.create_barang', compact('getProvinsi'))->with('status', $getProvinsi);        
+    function createBarang(){ 
+        $satuan = satuan::all();                  
+        return view('barang.create_barang', compact('satuan'));        
     }
 
     function storeBarang(Request $request){
-        toko::create([
+        barang::create([
             'nama' => $request->nama,
             'stok' => $request->stok,
             'harga_jual' => $request->harga_jual,
             'harga_pabrik' => $request->harga_pabrik,
-            'discount' => $request->discount
+            'discount' => $request->discount,
         ]);
         $toast = $this->successToast('data barang berhasil di tambahkan');                                        
         return redirect()->route('barang')->with('status', $toast);
-    }   
+    }
+       
 
     function editBarang($id){
         $barang = barang::findOrFail($id);
         $getProvinsi = $this->getProvinsi;      
-        $confirmModal = $this->saveConfirm('toko', route('toko'), 'confirm_modal', 'btn_submit');        
-        return view('toko.edit_toko', compact('toko', 'getProvinsi', 'confirmModal'));
+        $confirmModal = $this->saveConfirm('barang', route('barang'), 'confirm_modal', 'btn_submit');        
+        return view('barang.edit_barang', compact('barang', 'getProvinsi', 'confirmModal'));
     }
 
-    function updateToko(Request $request){
+    function updateBarang(Request $request){
         $barang = barang::findOrFail($request->id);   
         $barang->nama = $request->nama;
         $barang->kabupaten = $request->kabupaten;
@@ -55,4 +57,5 @@ class BarangController extends MessageController
         $toast = $this->successToast('data barang berhasil di hapus');                                
         return redirect()->back()->with('status', $toast);
     }
+
 }
