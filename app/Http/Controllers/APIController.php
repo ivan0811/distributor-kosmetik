@@ -28,5 +28,5 @@ class APIController extends MessageController
         $url = 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota='.$city;
         $getKabupaten = file_get_contents($url);                        
         return $getKabupaten;
-    }    
+    }
 }
