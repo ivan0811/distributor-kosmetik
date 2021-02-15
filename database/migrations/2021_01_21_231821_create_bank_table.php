@@ -14,7 +14,7 @@ class CreateBankTable extends Migration
     public function up()
     {
         Schema::create('bank', function (Blueprint $table) {
-            $table->bigIncrements('kode_bank', 4);
+            $table->string('kode_bank', 4)->unique()->primary();
             $table->string('nama_bank');
             $table->timestamps();
         });

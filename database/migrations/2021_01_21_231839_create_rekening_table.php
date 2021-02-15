@@ -15,7 +15,7 @@ class CreateRekeningTable extends Migration
     {
         Schema::create('rekening', function (Blueprint $table) {
             $table->string('norek')->unique()->primary();
-            $table->bigInteger('kode_bank')->unsigned();
+            $table->string('kode_bank');
             $table->string('atas_nama');
             $table->timestamps();
 

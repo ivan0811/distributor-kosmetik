@@ -51,6 +51,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::delete('/delete-sales/{id}', 'SalesController@deleteSales')->name('delete_sales');
     });
 
+<<<<<<< HEAD
     //crud pemasok
     Route::prefix('/pemasok')->group(function(){
         Route::get('/', 'PemasokController@pemasok')->name('pemasok');
@@ -81,6 +82,26 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('/edit-barang-keluar/{id}', 'BarangController@editBarangKeluar')->name('edit_barang_keluar');
         Route::patch('/update-barang-keluar', 'BarangController@updateBarangKeluar')->name('update_barang_keluar');
         Route::delete('/delete-barang-keluar/{id}', 'BarangController@deleteBarangKeluar')->name('delete_barang_keluar');
+=======
+    //crud bank
+    Route::prefix('/bank')->group(function(){
+        Route::get('/', 'BankController@bank')->name('bank');
+        Route::get('/create-bank', 'BankController@createBank')->name('create_bank');
+        Route::post('/store-bank', 'BankController@storeBank')->name('store_bank');
+        Route::get('/edit-bank/{kode_bank}', 'BankController@editBank')->name('edit_bank');
+        Route::patch('/update-bank', 'BankController@updateBank')->name('update_bank');
+        Route::delete('/delete-bank/{kode_bank}', 'BankController@deleteBank')->name('delete_bank');
+    });
+
+    //crud rekening
+    Route::prefix('/rekening')->group(function(){
+        Route::get('/', 'RekeningController@rekening')->name('rekening');
+        Route::get('/create-rekening', 'RekeningController@createRekening')->name('create_rekening');
+        Route::post('/store-rekening', 'RekeningController@storeRekening')->name('store_rekening');
+        Route::get('/edit-rekening/{norek}', 'RekeningController@editRekening')->name('edit_rekening');
+        Route::patch('/update-rekening', 'RekeningController@updateRekening')->name('update_rekening');
+        Route::delete('/delete-rekening/{norek}', 'RekeningController@deleteRekening')->name('delete_rekening');
+>>>>>>> 2f9148bdb99982ac7592be821512f3a6f5fc2038
     });
 
     //middleware auth admin
