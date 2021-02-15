@@ -52,6 +52,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     //crud pemasok
     Route::prefix('/pemasok')->group(function(){
         Route::get('/', 'PemasokController@pemasok')->name('pemasok');
@@ -83,6 +84,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::patch('/update-barang-keluar', 'BarangController@updateBarangKeluar')->name('update_barang_keluar');
         Route::delete('/delete-barang-keluar/{id}', 'BarangController@deleteBarangKeluar')->name('delete_barang_keluar');
 =======
+=======
+>>>>>>> 2f9148bdb99982ac7592be821512f3a6f5fc2038
     //crud bank
     Route::prefix('/bank')->group(function(){
         Route::get('/', 'BankController@bank')->name('bank');
@@ -101,6 +104,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('/edit-rekening/{norek}', 'RekeningController@editRekening')->name('edit_rekening');
         Route::patch('/update-rekening', 'RekeningController@updateRekening')->name('update_rekening');
         Route::delete('/delete-rekening/{norek}', 'RekeningController@deleteRekening')->name('delete_rekening');
+<<<<<<< HEAD
+>>>>>>> 2f9148bdb99982ac7592be821512f3a6f5fc2038
+=======
 >>>>>>> 2f9148bdb99982ac7592be821512f3a6f5fc2038
     });
 
