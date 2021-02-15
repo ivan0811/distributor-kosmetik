@@ -81,6 +81,8 @@
       </div>
     </div>
   </div>
+
+  
   <div class="col">
     <div class="custom-card">                  
       <div class="custom-card-header with-tools">                                                                  
@@ -90,7 +92,7 @@
         <li class="list-group-item">
           <div class="d-flex row">            
             <div class="p-2">
-              <a href="{{route('create_barang')}}" class="btn btn-custom-success"><span class="fa fa-plus"></span> Tambah Barang Masuk</a>                                           
+              <a href="{{route('create_barang_masuk')}}" class="btn btn-custom-success"><span class="fa fa-plus"></span> Tambah Barang Masuk</a>                                           
             </div>            
             <div class="p-2">
               <nav class="pagination-table" aria-label="Page navigation example">
@@ -115,7 +117,7 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Id Barang </th>              
+              <th scope="col">Barang Id </th>              
               <th scope="col">Kode Pabrik</th>                                           
               <th scope="col">Tanggal</th>
               <th scope="col">Jumlah</th>
@@ -126,7 +128,7 @@
             @php
             $no = 1  
             @endphp
-            @foreach ($barang as $key => $item)              
+            @foreach ($barangMasuk as $key => $item)              
             <tr>                                         
                 <th scope="row">{{$no++}}</th>
                 <td>{{$item->nama}}</td>                
@@ -135,12 +137,12 @@
                 <td>{{$item->harga_pabrik}}</td>
                 <td>{{$item->discount}}</td>                                                        
                 <td>                  
-                    <form action="{{route('delete_barang', $item->nama)}}" method="POST" id="form_delete{{$item->nama}}">
+                    <form action="{{route('delete_barang_masuk', $item->kode_pabrik)}}" method="POST" id="form_delete{{$item->kode_panrik}}">
                       {{ csrf_field() }}
                       {{ method_field('DELETE')}}                      
                       <div class="d-flex">                                                  
                       <div class="p-1">
-                          <a href="{{route('edit_barang', $item->nama)}}" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
+                          <a href="{{route('edit_barang_masuk', $item->nama)}}" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
                       </div>
                       <div class="p-1">
                           <button type="button" class="btn btn-custom-danger delete_confirm" data-id="{{$item->nama}}" data-toggle="modal"><span class="fa fa-trash"></span></button>
@@ -154,7 +156,9 @@
         </table>
       </div>
     </div>
-  </div>  
+  </div>
+  
+  
   <div class="col">
     <div class="custom-card">                  
       <div class="custom-card-header with-tools">                                                                  
@@ -164,12 +168,12 @@
         <li class="list-group-item">
           <div class="d-flex row">            
             <div class="p-2">
-              <a href="{{route('create_barang')}}" class="btn btn-custom-success"><span class="fa fa-plus"></span> Tambah Barang</a>                                           
+              <a href="{{route('create_barang_keluar')}}" class="btn btn-custom-success"><span class="fa fa-plus"></span> Tambah Barang Keluar</a>                                           
             </div>            
             <div class="p-2">
               <nav class="pagination-table" aria-label="Page navigation example">
                 <ul class="pagination">
-                 
+                  
                 </ul>
               </nav>
             </div>
@@ -189,11 +193,8 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Nama Barang </th>              
-              <th scope="col">Stok</th>                                           
-              <th scope="col">Harga Jual</th>
-              <th scope="col">Harga Pabrik</th>
-              <th scope="col">Discount</th>
+              <th scope="col">Barang Id </th>              
+              <th scope="col">Jumlah</th>                                           
               <th scope="col" width="170px">Aksi</th>
             </tr>
           </thead>
@@ -201,24 +202,21 @@
             @php
             $no = 1  
             @endphp
-            @foreach ($barang as $key => $item)              
+            @foreach ($barangKeluar as $key => $item)              
             <tr>                                         
                 <th scope="row">{{$no++}}</th>
-                <td>{{$item->nama}}</td>                
-                <td>{{$item->stok}}</td>                
-                <td>{{$item->harga_jual}}</td>
-                <td>{{$item->harga_pabrik}}</td>
-                <td>{{$item->discount}}</td>                                                        
+                <td>{{$item->barang_id}}</td>                
+                <td>{{$item->jumlah}}</td>                                                                       
                 <td>                  
-                    <form action="{{route('delete_barang', $item->nama)}}" method="POST" id="form_delete{{$item->nama}}">
+                    <form action="{{route('delete_barang_keluar', $item->id)}}" method="POST" id="form_delete{{$item->id}}">
                       {{ csrf_field() }}
                       {{ method_field('DELETE')}}                      
                       <div class="d-flex">                                                  
                       <div class="p-1">
-                          <a href="{{route('edit_barang', $item->nama)}}" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
+                          <a href="{{route('edit_barang_keluar', $item->id)}}" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
                       </div>
                       <div class="p-1">
-                          <button type="button" class="btn btn-custom-danger delete_confirm" data-id="{{$item->nama}}" data-toggle="modal"><span class="fa fa-trash"></span></button>
+                          <button type="button" class="btn btn-custom-danger delete_confirm" data-id="{{$item->id}}" data-toggle="modal"><span class="fa fa-trash"></span></button>
                       </div>
                     </div>                  
                     </form>                                                     

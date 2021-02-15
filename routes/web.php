@@ -66,9 +66,21 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('/', 'BarangController@barang')->name('barang');
         Route::get('/create-barang', 'BarangController@createBarang')->name('create_barang');
         Route::post('/store-barang', 'BarangController@storeBarang')->name('store_barang');
-        Route::get('/edit-barang/{id}', 'BarangController@editBarang')->name('edit_barang');
+        Route::get('/edit-barang/{nama}', 'BarangController@editBarang')->name('edit_barang');
         Route::patch('/update-barang', 'BarangController@updateBarang')->name('update_barang');
-        Route::delete('/delete-barang/{id}', 'BarangController@deleteBarang')->name('delete_barang');
+        Route::delete('/delete-barang/{nama}', 'BarangController@deleteBarang')->name('delete_barang');
+        // barang masuk
+        Route::get('/create-barang-masuk', 'BarangController@createBarangMasuk')->name('create_barang_masuk');
+        Route::post('/store-barang-masuk', 'BarangController@storeBarangMasuk')->name('store_barang_masuk');
+        Route::get('/edit-barang-masuk/{kode_pabrik}', 'BarangController@editBarangMasuk')->name('edit_barang_masuk');
+        Route::patch('/update-barang-masuk', 'BarangController@updateBarangMasuk')->name('update_barang_masuk');
+        Route::delete('/delete-barang-masuk/{kode_pabrik}', 'BarangController@deleteBarangMasuk')->name('delete_barang_masuk');
+        // barang keluar
+        Route::get('/create-barang-keluar', 'BarangController@createBarangKeluar')->name('create_barang_keluar');
+        Route::post('/store-barang-keluar', 'BarangController@storeBarangKeluar')->name('store_barang_keluar');
+        Route::get('/edit-barang-keluar/{id}', 'BarangController@editBarangKeluar')->name('edit_barang_keluar');
+        Route::patch('/update-barang-keluar', 'BarangController@updateBarangKeluar')->name('update_barang_keluar');
+        Route::delete('/delete-barang-keluar/{id}', 'BarangController@deleteBarangKeluar')->name('delete_barang_keluar');
     });
 
     //middleware auth admin

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Barang extends Model
 {
     protected $table = 'barang';
-    protected $fillable = ['nama', 'stok', 'harga_jual', 'harga_pabrik', 'discount'];
+    protected $fillable = ['user_id', 'nama', 'stok', 'harga_jual', 'harga_pabrik', 'discount'];
 
     public function satuan()
     {
