@@ -87,7 +87,7 @@
                     <div class="col-sm-10">
                       <select class="form-control" id="kabupaten" name="kabupaten" required>
                         <option value="">Pilih Kabupaten / Kota</option>       
-                        @foreach ($getProvinsi as $item)
+                        @foreach ($getKabupaten as $item)
                             @if ($item->nama == $user->kabupaten)
                               <option data-id="{{$item->id}}" value="{{$item->nama}}" selected>{{$item->nama}}</option>
                               @continue    
@@ -184,7 +184,7 @@
     setKecamatan($('#kabupaten').find(':selected').data('id'), '{{$user->kecamatan}}');  
     function setKecamatan(id, selected = ''){
       $.ajax({        
-            'url' : '{{route('get_kabupaten')}}',
+            'url' : '{{route('get_kecamatan')}}',
             'type' : 'POST',        
             'data' : {
                 '_token' : '{{csrf_token()}}',

@@ -1,13 +1,13 @@
 .wrap {
     display: grid;        
-    background-color: #f2f0f0; 
+    background-color: #FEEAF4; 
     grid-template-rows: max-content auto max-content; 
     grid-template-columns: min-content;    
     height: 100%;
 }
 
 .main-side{
-    width: 250px;                
+    width: 280px;                
     padding: 10px;
     grid-column: 1;
     grid-row: 1 / span 3;    
@@ -17,7 +17,8 @@
 aside.mini-main-side{
     /* width: 0px;    */
     /* padding: 0px;  */
-    margin-left: -250px;
+    padding-left: 200px;
+    margin-left: -200px;
 }
 
 aside.mini-main-side > div > div.navbar-logo > img{
@@ -27,11 +28,11 @@ aside.mini-main-side > div > div.navbar-logo > img{
 .nav-light{
     /* margin-left: 250px;     */
     /* margin-bottom: 100px;     */    
-    background-color: white;
+    background-color:transparent;
     height: min-content;
     grid-column: 2;
     grid-row: 1;
-    border-bottom: #dfdfdf 1px solid;
+    /* border-bottom: #dfdfdf 1px solid; */
 }
 
 
@@ -48,11 +49,15 @@ footer{
     grid-column: 2;
     grid-row: 3;    
     grid-row-end: auto;
-    background-color: white;
+    background-color:transparent;
     height: min-content;    
-    border-top: #dfdfdf 1px solid;
+    /* border-top: #dfdfdf 1px solid; */
     clear: both;            
+    color: #9A9A9A;
+    font-size: 17px;
 }
+
+
 
 .navbar-main{
     margin-top: 10px;

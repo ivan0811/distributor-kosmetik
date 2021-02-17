@@ -14,8 +14,8 @@ class SalesController extends APIController
     }
     
     function createSales(){
-        $getProvinsi = $this->getProvinsi;      
-        return view('sales.create_sales', compact('getProvinsi'));
+        $getKabupaten = $this->getKabupaten;              
+        return view('sales.create_sales', compact('getKabupaten'));
     }
 
     function storeSales(Request $request){
@@ -33,9 +33,9 @@ class SalesController extends APIController
 
     function editSales($id){
         $sales = Sales::findOrFail($id);        
-        $getProvinsi = $this->getProvinsi;
+        $getKabupaten = $this->getKabupaten;    
         $confirmModal = $this->saveConfirm('sales', route('sales'), 'confirm_modal', 'btn_submit');        
-        return view('sales.edit_sales', compact('sales', 'getProvinsi', 'confirmModal', 'getProvinsi'));
+        return view('sales.edit_sales', compact('sales', 'getKabupaten', 'confirmModal', 'getProvinsi'));
     }
 
     function updateSales(Request $request){

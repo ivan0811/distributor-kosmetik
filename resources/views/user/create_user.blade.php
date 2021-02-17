@@ -80,7 +80,7 @@
                     <div class="col-sm-10">
                       <select class="form-control" id="kabupaten" name="kabupaten" required>
                         <option value="" selected>Pilih Kabupaten / Kota</option>       
-                        @foreach ($getProvinsi as $item) --}}
+                        @foreach ($getKabupaten as $item)
                             <option data-id="{{$item->id}}" value="{{$item->nama}}">{{$item->nama}}</option>
                          @endforeach                                                                       
                       </select>
@@ -143,7 +143,7 @@
         $('#kecamatan').empty();
         $('#kecamatan').append('<option value="" selected>Pilih Kecamatan</option>');
         $.ajax({        
-            'url' : '{{route('get_kabupaten')}}',
+            'url' : '{{route('get_kecataman')}}',
             'type' : 'POST',        
             'data' : {
                 '_token' : '{{csrf_token()}}',

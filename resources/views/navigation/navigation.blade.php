@@ -30,10 +30,12 @@
 <body class="wrap">         
     <aside class="main-side bg-side">
         <div class="container">
-            <div class="navbar-logo justify-content-center">
+          <div class="slide-button d-flex">
+            <a class="ml-auto btn-side" data-widget="pushmenu" href="#" role="button" id="btn_side"><i class="fa fa-arrow-left"></i></a>
+          </div>
+          <div class="navbar-logo justify-content-center">
               <!-- <div class=""></div> -->              
-                <img src="{{asset('template/img/logo.svg')}}" alt="">
-                <h5>Sinar Jaya</h5>
+                <img src="{{asset('template/img/logo.svg')}}" alt="">                
             </div>            
             <div class="navbar-main">              
                 <ul>
@@ -55,9 +57,9 @@
                     </li> 
                     <li class="navbar-item">                                            
                       <a href="form.html" class="btn-custom-menu">
-                        <span class="fa fa-cash-register"></span>
+                        <span class="fa fa-file-invoice-dollar"></span>
                         <p class="custom-menu-text">  
-                          Pesanan
+                          Cicilan
                         </p>
                       </a>
                     </li>      
@@ -76,7 +78,39 @@
                           Sales
                         </p>
                       </a>
-                    </li>                                                            
+                    </li>    
+                    <li class="navbar-item {{Request::segment(1) == 'bank' ? 'active' : ''}}">                                            
+                      <a href="{{route('bank')}}" class="btn-custom-menu">
+                        <span class="fa fa-university"></span>
+                        <p class="custom-menu-text">  
+                          Bank
+                        </p>
+                      </a>
+                    </li>  
+                    <li class="navbar-item {{Request::segment(1) == 'rekening' ? 'active' : ''}}">                                            
+                      <a href="{{route('rekening')}}" class="btn-custom-menu">
+                        <span class="fa fa-credit-card"></span>
+                        <p class="custom-menu-text">  
+                          Rekening
+                        </p>
+                      </a>
+                    </li>   
+                    <li class="navbar-item {{Request::segment(1) == 'pemasok' ? 'active' : ''}}">                                            
+                      <a href="{{route('pemasok')}}" class="btn-custom-menu">
+                        <span class="fa fa-industry"></span>
+                        <p class="custom-menu-text">  
+                          Pemasok
+                        </p>
+                      </a>
+                    </li>        
+                    <li class="navbar-item {{Request::segment(1) == 'barang' ? 'active' : ''}}">                                            
+                      <a href="{{route('barang')}}" class="btn-custom-menu">
+                        <span class="fa fa-box"></span>
+                        <p class="custom-menu-text">  
+                          Barang
+                        </p>
+                      </a>
+                    </li>                                                   
                     
                 @if (\Auth::user()->role_id == 1) 
                   <li class="navbar-item {{Request::segment(1) == 'user' ? 'active' : ''}}">
@@ -93,55 +127,47 @@
         </div>        
     </aside>   
     <nav class="navbar navbar-expand-lg navbar-light nav-light">                        
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">          
           <ul class="navbar-nav mr-auto">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button" id="btn_side"><i class="fas fa-bars"></i></a>            
-          </ul>          
-          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <div class="content-header ml-4 mt-2">
+                <h2>@yield('title')</h2>
+              </div> 
+            </li>            
+          </ul> 
+          <ul class="navbar-nav ml-auto navbar-user-profile">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if (\Auth::user()->foto == null)
-                  <img src="{{asset('template/img/user1.svg')}}" alt="" class="user-profile-img-sm">
-                @else
-                <img src="{{asset('storage/profile/'.\Auth::user()->foto)}}" alt="" class="user-profile-img-sm">
-                @endif               
-                {{\Auth::user()->username}}                 
+                <img src="{{asset('template/img/user1.svg')}}" alt="" class="user-profile-img-sm">
+              @else
+              <img src="{{asset('storage/profile/'.\Auth::user()->foto)}}" alt="" class="user-profile-img-sm">
+              @endif   
+                {{\Auth::user()->username}} 
               </a>
-              <div class="dropdown-menu user-area" aria-labelledby="navbarDropdown">
-                <div class="row">
-                  <div class="col-sm-12">                  
+              <div class="dropdown-menu user-area" aria-labelledby="navbarDropdown">                
+                  <!-- <div class="col-sm-12">                  
                     <div class="d-flex justify-content-center box-user-area">
-                      @if (\Auth::user()->foto == null)                        
-                        <img src="{{asset('template/img/user1.svg')}}" alt="" class="user-profile-img-area">
-                      @else
-                        <img src="{{asset('storage/profile/'.\Auth::user()->foto)}}" alt="" class="user-profile-img-area">
-                      @endif                                                   
+                      <img src="/img/programmer.png" alt="" class="user-profile-img-area">
                     </div>
-                  </div>                   
-                    <div class="col-sm-6">                      
-                      <a href="{{route('profile_user')}}" class="btn-custom-sm btn-custom-success">Profile</a>
-                    </div>
-                    <div class="col-sm-6">                                              
-                        <a href="#" id="logout_button" class="btn-custom-sm btn-custom-danger" onclick="$('#logout').submit()">Logout</a>
-                        {{-- <a href="login.html" id="logout_button" class="btn-custom-sm btn-custom-danger">Logout</a> --}}                                      
-                    </div>                
-                    <form action="{{route('logout')}}" method="POST" id="logout">            
-                      @csrf
-                  </form>                  
-                </div>                                                
+                  </div>                    -->                    
+                      <a href="{{route('profile_user')}}" class="dropdown-item btn-custom-sm"><i class="fa fa-user"></i> &nbsp; Edit Profile</a>                                        
+                      <a href="#" onclick="$('#logout').submit()" id="logout_button" class="dropdown-item btn-custom-sm btn-logout"><i class="fa fa-sign-out-alt"></i> &nbsp; Logout</a>                    
+                      <form action="{{route('logout')}}" method="POST" id="logout">            
+                        @csrf
+                    </form> 
               </div>
             </li>
-          </ul>
+          </ul>         
         </div>
       </nav>          
       <section class="content">           
-          <div class="container-fluid">
-            <div class="content-header">
-              <h3>@yield('header')</h3>
-          </div>   
-          <div class="row">
-            @yield('content')
+          <div class="container-fluid">            
+            <div class="container">
+          <div class="row">            
+              @yield('content')                   
           </div>            
+        </div>     
           </div>
                
       </section>    

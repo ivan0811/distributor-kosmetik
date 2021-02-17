@@ -34,7 +34,7 @@ class UserController extends APIController
             'required' => ':attribute wajib di isi',
             'unique' => ':attribute sudah ada silahkan isi dengan input yang berbeda',
             'min' => ':attribute minimal 8'
-        ]);
+        ]);        
         
         user::create([
             'name' => $request->nama,
@@ -59,9 +59,9 @@ class UserController extends APIController
     
     function editUser($id){
         $user = User::findOrFail($id);
-        $getProvinsi = $this->getProvinsi;      
+        $getKabupaten = $this->getKabupaten;    
         $confirmModal = $this->saveConfirm('user', route('user'), 'confirm_modal', 'btn_submit');        
-        return view('user.edit_user', compact('user', 'getProvinsi', 'confirmModal'));
+        return view('user.edit_user', compact('user', 'getKabupaten', 'confirmModal'));
     }        
 
     function updateUser(Request $request){    
@@ -102,8 +102,8 @@ class UserController extends APIController
 
     function editProfile(){
         $user = user::findOrFail(Auth::id());
-        $getProvinsi = $this->getProvinsi;      
-        return view('user.profile', compact('user', 'getProvinsi'));
+        $getKabupaten = $this->getKabupaten;    
+        return view('user.profile', compact('user', 'getKabupaten'));
     }
 
     function updateProfile(Request $request){

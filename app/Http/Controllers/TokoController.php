@@ -14,8 +14,8 @@ class TokoController extends APIController
     }
 
     function createToko(){        
-        $getProvinsi = $this->getProvinsi;            
-        return view('toko.create_toko', compact('getProvinsi'))->with('status', $getProvinsi);        
+        $getKabupaten = $this->getKabupaten;             
+        return view('toko.create_toko', compact('getKabupaten'));        
     }
 
     function storeToko(Request $request){
@@ -32,9 +32,9 @@ class TokoController extends APIController
 
     function editToko($id){
         $toko = Toko::findOrFail($id);
-        $getProvinsi = $this->getProvinsi;      
+        $getKabupaten = $this->getKabupaten;         
         $confirmModal = $this->saveConfirm('toko', route('toko'), 'confirm_modal', 'btn_submit');        
-        return view('toko.edit_toko', compact('toko', 'getProvinsi', 'confirmModal'));
+        return view('toko.edit_toko', compact('toko', 'getKabupaten', 'confirmModal'));
     }
 
     function updateToko(Request $request){

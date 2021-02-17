@@ -34,6 +34,13 @@ class CreateDetailPesananTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });
+
+        Schema::table('barang_keluar', function (Blueprint $table) {
+            $table->foreign('detail_pesanan_id')
+            ->references('id')
+            ->on('detail_pesanan')
+            ->onDelete('set null');
+        });
     }
 
     /**
@@ -43,6 +50,9 @@ class CreateDetailPesananTable extends Migration
      */
     public function down()
     {
+        Schema::table('barang_keluar', function (Blueprint $table) {
+            $table->dropForeign('barang_keluar_detail_pesanan_id_foreign');
+        });
         Schema::dropIfExists('detail_pesanan');
     }
 }

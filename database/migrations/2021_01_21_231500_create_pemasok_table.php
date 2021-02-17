@@ -15,7 +15,7 @@ class CreatePemasokTable extends Migration
     {
         Schema::create('pemasok', function (Blueprint $table) {
             $table->string('kode_pabrik')->unique()->primary();
-            $table->string('kode_bpom');
+            $table->string('provinsi');
             $table->string('kabupaten');
             $table->string('kecamatan');
             $table->text('alamat');

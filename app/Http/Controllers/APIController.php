@@ -6,27 +6,36 @@ use Illuminate\Http\Request;
 
 class APIController extends MessageController
 {
-    protected $getProvinsi;         
+    protected $getProvinsi;  
+    protected $getKabupaten;      
     
     public function __construct()
     {
-        try {
-            $this->getProvinsi = collect(json_decode($this->getProvinsi()))['kota_kabupaten'];
-        } catch (\Throwable $th) {
-            $this->getProvinsi = $this->dangerToast('koneksi error periksa kembali koneksi internet anda');
-        }        
-    }
-    
-    function getProvinsi(){                
-        $url = 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=13';
-        $get_provinsi = file_get_contents($url);                                    
-        return $get_provinsi;
+        
+            $this->getProvinsi = collect(json_decode($this->getProvinsi()))['provinsi'];
+            $this->getKabupaten = collect(json_decode($this->getKabupaten(13)))['kota_kabupaten'];        
     }
 
-    function getKabupaten(Request $request){        
+    function getProvinsi(){
+        $url = 'https://dev.farizdotid.com/api/daerahindonesia/provinsi';
+        $getProvinsi = file_get_contents($url);
+        return $getProvinsi;
+    }    
+
+    function getKabupaten($provinsi){                        
+        $url = 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='.$provinsi;
+        $getKabupaten = file_get_contents($url);                                    
+        return $getKabupaten;
+    }   
+
+    function getKabupatenReq(Request $request){
+        return $this->getKabupaten($request->provinsi);
+    }
+        
+    function getKecamatan(Request $request){        
         $city = $request->kabupaten;
         $url = 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota='.$city;
-        $getKabupaten = file_get_contents($url);                        
-        return $getKabupaten;
-    }    
+        $getKecamatan = file_get_contents($url);                        
+        return $getKecamatan;
+    }
 }

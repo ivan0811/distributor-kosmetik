@@ -29,14 +29,6 @@ class CreatePembayaranTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });
-
-        Schema::table('cicilan', function (Blueprint $table) {
-            $table->foreign('pembayaran_id')
-            ->references('id')
-            ->on('pembayaran')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
-        });
     }
 
     /**
@@ -45,10 +37,7 @@ class CreatePembayaranTable extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::table('cicilan', function (Blueprint $table) {
-            $table->dropForeign('cicilan_pembayaran_id_foreign');
-        });
+    {        
         Schema::dropIfExists('pembayaran');
     }
 }

@@ -15,7 +15,7 @@
         <li class="list-group-item">
           <div class="d-flex row">            
             <div class="p-2">
-              <a href="{{route('create_user')}}" class="btn btn-custom-success"><span class="fa fa-plus"></span> Tambah Transaksi</a>                                           
+              <a href="{{route('create_transaksi')}}" class="btn btn-custom-success"><span class="fa fa-plus"></span> Tambah Transaksi</a>                                           
             </div>            
             <div class="p-2">
               <form action="">
