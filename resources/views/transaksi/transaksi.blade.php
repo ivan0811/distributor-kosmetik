@@ -20,45 +20,41 @@
     <div class="custom-card">                  
       <div class="custom-card-header with-tools">                                                                  
             <h5>Mengelola Transaksi</h5>                                                                                                                                                                      
-      </div>        
+      </div>   
+      <div class="container-fluid">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <div class="d-flex row">            
             <div class="p-2">
               <a href="{{route('create_transaksi')}}" class="btn btn-custom-success"><span class="fa fa-plus"></span> Tambah Transaksi</a>                                           
-            </div>            
-            <div class="p-2">
-              @if (\Auth::user()->role_id == 1)
+            </div>           
+            @if (\Auth::user()->role_id == 1) 
+            <div class="p-2">              
               <form action="">
-                <button type="submit" class="btn btn-custom-danger"><span class="fa fa-trash"></span> Hapus Semua Transaksi</button>
-              </form>
-              @endif              
+                <button type="submit" class="btn btn-danger"><span class="fa fa-times"></span> Hapus Semua Transaksi</button>
+              </form>              
             </div>            
             <div class="p-2">
               <form action="">
                 <button type="submit" class="btn btn-info"><span class="fa fa-file-csv"></span> Export CSV Transaksi</button>
               </form>
-            </div>            
+            </div>   
+            @endif                       
             <div class="p-2">
               <nav class="pagination-table" aria-label="Page navigation example">
                 <ul class="pagination">
                  
                 </ul>
               </nav>
-            </div>
-            <div class="align-self-center p-2">
-              <p class="text-card" style="margin-bottom: 0">Total Transaksi : <span class="total-row"></span></p>              
-            </div>
-            <div class="ml-auto p-2">
-              <form class="form-inline custom-search-table">                    
-                <input class="form-control search-box" type="text" placeholder="Search" aria-label="Search">                            
-              </form>
-            </div>                                    
+            </div>            
+            <div class="ml-auto p-2">                          
+              <input class="form-control search-box" type="text" placeholder="Search" aria-label="Search">                                                      
+          </div>                                   
           </div>                                                                                            
       </li>      
       </ul>                         
       <div class="custom-card-body-table table-responsive">
-        <table class="table">
+        <table class="table table-fixed display nowrap"  id="data_table" width="100%">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -92,17 +88,19 @@
                       {{ method_field('DELETE')}}                      
                       <div class="d-flex">
                         <div class="p-1">
-                          <a href="" class="btn btn-success"><span class="fa fa-copy"></span></a>
+                          <a href="" class="btn-custom-manage btn-success"><span class="fa fa-copy"></span></a>
                         </div>                                  
                       <div class="p-1">
-                        <a href="" class="btn btn-info"><span class="fa fa-eye"></span></a>
+                        <a href="" class="btn-custom-manage btn-custom-info"><span class="fa fa-list"></span></a>
                       </div>                                  
                       <div class="p-1">
-                          <a href="{{route('edit_transaksi', $item->no_pesanan)}}" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
+                          <a href="{{route('edit_transaksi', $item->no_pesanan)}}" class="btn-custom-manage btn-custom-warning"><span class="fa fa-edit"></span></a>
                       </div>
-                      <div class="p-1">
-                          <button type="button" class="btn btn-custom-danger delete_confirm" data-id="" data-toggle="modal"><span class="fa fa-trash"></span></button>
+                      @if (\Auth::user()->role_id == 1) 
+                        <div class="p-1">
+                          <button type="button" class="btn-custom-manage btn-custom-danger delete_confirm" data-id="" data-toggle="modal"><span class="fa fa-times"></span></button>
                       </div>
+                      @endif                             
                     </div>                  
                     </form>                                                     
                 </td>
@@ -111,6 +109,19 @@
           </tbody>
         </table>
       </div>
+      <div class="d-flex mt-2">
+        <div class="align-self-center p-2">
+          <p class="text-card" style="margin-bottom: 0">Total Transaksi : <span class="total-row"></span></p>              
+        </div>
+        <div class="ml-auto p-2">
+          <nav class="pagination-table" aria-label="Page navigation example">
+            <ul class="pagination">
+             
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
     </div>
   </div>  
 @endsection
