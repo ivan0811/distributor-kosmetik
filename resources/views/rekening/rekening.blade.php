@@ -6,17 +6,26 @@
     Rekening
 @endsection
 @section('content')
+@if (count($alert) > 0)
+<div class="col-12">  
+  <div class="alert alert-danger" role="alert">
+    @foreach ($alert as $item)
+        <li>{{$item}}</li>
+    @endforeach
+  </div>
+</div>
+@endif
 <div class="col-sm-12">
     <div class="custom-card">                  
       <div class="custom-card-header with-tools">                                                                  
-        <h5>Mengelola Bank</h5>                                                                                                                                                                      
+        <h5>Mengelola Rekening</h5>                                                                                                                                                                      
     </div>        
     <div class="container-fluid">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <div class="d-flex row">            
             <div class="p-2 d-inline-flex">
-              <a href="{{route('create_rekening')}}" class="btn-custom btn-custom-success"><span class="fa fa-plus"></span> Tambah Bank</a>                                           
+              <a href="{{route('create_rekening')}}" class="btn-custom btn-custom-success"><span class="fa fa-plus"></span> Tambah Rekening</a>                                           
             </div>                                                            
             <div class="ml-auto p-2">                          
                 <input class="form-control search-box" type="text" placeholder="Search" aria-label="Search">                                                      

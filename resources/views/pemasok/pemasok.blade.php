@@ -45,7 +45,7 @@
             <tr>                                         
                 <th scope="row">{{$no++}}</th>
                 <td>{{$item->kode_pabrik}}</td>                
-                <td>{{$item->kode_bpom}}</td>                
+                <td>{{$item->provinsi}}</td>                
                 <td>{{$item->kabupaten}}</td>
                 <td>{{$item->kecamatan}}</td>
                 <td>{{$item->alamat}}</td>                                                         

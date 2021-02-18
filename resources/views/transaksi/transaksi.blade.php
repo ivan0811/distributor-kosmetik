@@ -6,6 +6,16 @@
     Transaksi
 @endsection
 @section('content')
+@if (count($alert) > 0)
+<div class="col-12">
+  <div class="alert alert-danger" role="alert">
+    @foreach ($alert as $item)
+        <li>{{$item}}</li>
+    @endforeach
+  </div>
+</div>
+@endif
+
 <div class="col-sm-12">
     <div class="custom-card">                  
       <div class="custom-card-header with-tools">                                                                  
@@ -18,9 +28,11 @@
               <a href="{{route('create_transaksi')}}" class="btn btn-custom-success"><span class="fa fa-plus"></span> Tambah Transaksi</a>                                           
             </div>            
             <div class="p-2">
+              @if (\Auth::user()->role_id == 1)
               <form action="">
                 <button type="submit" class="btn btn-custom-danger"><span class="fa fa-trash"></span> Hapus Semua Transaksi</button>
               </form>
+              @endif              
             </div>            
             <div class="p-2">
               <form action="">
@@ -45,37 +57,35 @@
           </div>                                                                                            
       </li>      
       </ul>                         
-      <div class="custom-card-body-table table-responsive" style="max-height: 440px;">
+      <div class="custom-card-body-table table-responsive">
         <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Nama</th>
-              <th scope="col">Email</th>
-              <th scope="col">Username</th>                 
-              <th scope="col">Nomor HP</th>   
-              <th scope="col">Akses</th>           
+              <th scope="col">No Pesanan</th>
+              <th scope="col">Toko</th>
+              <th scope="col">Sales</th>                 
+              <th scope="col">Jumlah Barang</th>   
+              <th scope="col">Total Harga</th>           
+              <th scope="col">Status Pembayaran</th>           
+              <th scope="col">Tanggal Transaksi</th>     
               <th scope="col" width="170px">Aksi</th>
             </tr>
           </thead>
           <tbody class="search-table">
-            {{-- @php
+            @php
                 $no = 1  
               @endphp
-              @foreach ($users as $key => $item)
-              @if ($item->id == 1)
-                @continue  
-              @endif
-              @if (\Auth::user()->id == $item->id)
-                  @continue
-              @endif --}}
+              @foreach ($pesanan as $key => $item)              
             <tr>                                         
-                <th scope="row"></th>
-                <td></td>                
-                <td></td>                
-                <td></td>
-                <td></td>   
-                <td></td>                             
+                <th scope="row">{{$no++}}</th>
+                <td>{{$item->no_pesanan}}</td>                
+                <td>{{$item->toko->nama}}</td>                
+                <td>{{$item->sales->nama}}</td>
+                <td>{{$countBarang[$key]->count}}</td>   
+                <td>{{$item->total_harga}}</td>   
+                <td>{{$pembayaran[$key]->status_pembayaran}}</td>  
+                <td>{{$item->created_at}}</td>                                             
                 <td>                  
                     <form action="" method="POST" id="delete_user">
                       {{ csrf_field() }}
@@ -88,7 +98,7 @@
                         <a href="" class="btn btn-info"><span class="fa fa-eye"></span></a>
                       </div>                                  
                       <div class="p-1">
-                          <a href="" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
+                          <a href="{{route('edit_transaksi', $item->no_pesanan)}}" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
                       </div>
                       <div class="p-1">
                           <button type="button" class="btn btn-custom-danger delete_confirm" data-id="" data-toggle="modal"><span class="fa fa-trash"></span></button>
@@ -97,7 +107,7 @@
                     </form>                                                     
                 </td>
               </tr>                                         
-              {{-- @endforeach               --}}
+              @endforeach              
           </tbody>
         </table>
       </div>

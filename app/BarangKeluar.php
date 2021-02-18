@@ -8,14 +8,14 @@ class BarangKeluar extends Model
 {
     protected $table = 'barang_keluar';
     protected $fillable = ['id', 'barang_id', 'jumlah'];
-    
-    /**
-     * Get the user that owns the BarangKeluar
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+
     public function barang()
     {
         return $this->belongsTo('App/Barang');
+    }
+    
+    public function DetailPesanan()
+    {
+        return $this->belongsTo(DetailPesanan::class);
     }
 }

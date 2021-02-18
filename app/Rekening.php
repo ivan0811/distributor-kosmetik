@@ -17,5 +17,5 @@ class Rekening extends Model
     public function pembayaran()
     {
         return $this->hasMany(Pembayaran::class, 'rekening_id');
-    }
+    }    
 }

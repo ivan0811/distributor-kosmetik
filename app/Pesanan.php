@@ -7,10 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 class Pesanan extends Model
 {
     protected $table = 'pesanan';
-    protected $fillable = ['no_pesanan', 'toko_id', 'sales_id', 'total_barang', 'total_harga'];
+    protected $fillable = ['no_pesanan', 'toko_id', 'sales_id', 'total_harga'];
     
     public function DetailPesanan()
     {
-        return $this->belongsTo(DetalPesanan::class, 'no_pesanan');
+        return $this->hasMany(DetailPesanan::class, 'no_pesanan');
+    }
+    
+    public function Pembayaran()
+    {
+        return $this->hasMany(Pembayaran::class, 'no_pesanan');
+    }
+    
+    public function toko()
+    {
+        return $this->belongsTo(Toko::class);
+    }
+
+    public function sales()
+    {
+        return $this->belongsTo(Sales::class);
     }
 }

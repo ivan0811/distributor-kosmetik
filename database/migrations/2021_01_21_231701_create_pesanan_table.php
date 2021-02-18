@@ -16,9 +16,8 @@ class CreatePesananTable extends Migration
         Schema::create('pesanan', function (Blueprint $table) {
             $table->bigIncrements('no_pesanan');            
             $table->bigInteger('toko_id')->unsigned();
-            $table->bigInteger('sales_id')->unsigned();                        
-            $table->integer('total_barang');                        
-            $table->integer('total_harga');            
+            $table->bigInteger('sales_id')->unsigned();                                    
+            $table->integer('total_harga');                  
             $table->timestamps();
 
             $table->foreign('sales_id')

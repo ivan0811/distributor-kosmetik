@@ -6,15 +6,8 @@
     Transaksi
 @endsection
 @section('content')
-<form action="{{route('store_user')}}" id="form_user" method="POST" class="col-md-12">       
-  <div class="row">
-  {{ csrf_field() }}
-<div class="col-md-6">
-    <div class="custom-card">                  
-      <div class="custom-card-header text-clear">
-        <h5>Form Transaksi</h5>                    
-      </div>               
-      @if ($errors->any())
+@if ($errors->any())
+<div class="col-12">
           <div class="alert alert-danger">
               <ul>
                   @foreach ($errors->all() as $error)
@@ -22,17 +15,27 @@
                   @endforeach
               </ul>
           </div>
-      @endif                       
+        </div>
+      @endif        
+<form action="{{route('store_transaksi')}}" id="form_user" method="POST" class="col-md-12">       
+  <div class="row">
+  {{ csrf_field() }}
+  <input type="hidden" id="jumlah_barang" name="jumlah_barang">  
+<div class="col-md-6">
+    <div class="custom-card">                  
+      <div class="custom-card-header text-clear">
+        <h5>Form Transaksi</h5>                    
+      </div>                                          
       <div class="custom-card-body">                                                                            
             <div class="container-fluid">                
               <div class="form-row">                
                 <div class="col-md-12 mb-3">
                   <label for="">No Pesanan</label>
-                  <input type="text" name="nama" class="form-control" id="nama" placeholder="No Pesanan" readonly>                    
+                  <input type="text" id="no_pesanan" name="no_pesanan" class="form-control" id="nama" placeholder="No Pesanan" readonly>                    
                 </div>
                 <div class="col-md-12 mb-3">
                   <label for="">Nama Toko</label>
-                    <select name="toko" id="" class="form-control">
+                    <select name="toko_id" id="" class="form-control" required>
                       <option value="">Pilih Toko</option>
                       @foreach ($toko as $item)
                         <option value="{{$item->id}}">{{$item->nama}}</option>                        
@@ -41,7 +44,7 @@
                 </div>      
                 <div class="col-md-12 mb-3">
                   <label for="">Nama Sales</label>
-                  <select name="toko" id="" class="form-control">
+                  <select name="sales_id" id="" class="form-control" required>
                     <option value="">Pilih Sales</option>
                     @foreach ($sales as $item)
                         <option value="{{$item->id}}">{{$item->nama}}</option>                        
@@ -50,7 +53,7 @@
                 </div>                          
                 <div class="col-md-12 mb-3">
                   <label for="">Tanggal Transaksi</label>
-                  <input type="datetime-local" class="form-control" id="transaction_date"> 
+                  <input type="datetime-local" class="form-control" name="tanggal_transaksi" id="transaction_date"> 
                 </div>                            
               </div>                                                                                                                                                                     
                 </div>                                                                                                                                                                               
@@ -61,61 +64,59 @@
     <div class="custom-card">                  
       <div class="custom-card-header text-clear">
         <h5>Form Pembayaran</h5>                    
-      </div>               
-      @if ($errors->any())
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-      @endif                       
+      </div>                     
       <div class="custom-card-body">                                                                            
             <div class="container-fluid">                
               <div class="form-row">                
                 <div class="col-8 mb-3">
                   <label for="">Jumlah Bayar</label>
-                  <input type="text" name="nama" class="form-control" id="nama" placeholder="Jumlah Bayar" readonly>                    
+                  <input type="text" name="jumlah_pembayaran" class="form-control" id="jumlah_bayar" placeholder="Jumlah Bayar" readonly>                    
                 </div>
+                
                 <div class="col-4 mb-3">
                   <label for="">Total Diskon</label>
-                  <input type="text" name="nama" class="form-control" id="nama" placeholder="Total Diskon" readonly>                    
+                  <div class="input-group mb-3">                        
+                            <input type="text" id="total_diskon" name="total_discount" class="form-control" id="nama" placeholder="Total Diskon" readonly>                    
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">%</span>
+                              </div>
+                          </div>                                      
                 </div>
                 <div class="col-md-12 mb-3">
                   <label for="">Status Pembayaran</label>
-                  <input type="text" value="BELUM LUNAS" class="form-control" readonly>
+                  <input id="status_pembayaran" type="text" value="BELUM LUNAS / CICILAN" class="form-control" readonly>
                 </div>   
                 <div class="col-md-6 mb-3">
                   <label for="">Tanggal Pembayaran</label>
-                  <input type="datetime-local" class="form-control" id="pay_date"> 
+                  <input type="datetime-local" class="form-control" id="pay_date" name="tanggal_pembayaran"> 
                 </div>   
                 <div class="col-md-6 mb-3">
                   <label for="">Metode Pembayaran</label>
-                  <select class="form-control" id="method_payment" name="status" required>                    
+                  <select class="form-control" id="method_payment" name="metode_pembayaran" required>                    
                     <option value="cash" selected>Cash</option>
                     <option value="transfer">Transfer</option>
                   </select>                     
                 </div>                                   
                 <div class="col-md-6 mb-3">
                   <label for="">Bayar</label>
-                  <input type="number" value="0" class="form-control without-arrow" required>                         
+                  <input type="number" name="total_bayar" value="0" class="form-control without-arrow" oninput="bayar(this)" required>                         
                 </div>                                       
                 <div class="col-md-6 mb-3">
                   <label for="">Kembalian</label>
-                  <input type="number" value="0" class="form-control without-arrow" readonly>                         
+                  <input type="number" id="kembalian" value="0" class="form-control without-arrow" readonly>                         
                 </div>                        
                   <div class="col-md-6 mb-3 transfer">
                     <label for="">Rekening</label>                                                          
-                      <select class="form-control selectpicker custom-select" data-live-search="true">
+                      <select class="form-control selectpicker custom-select" id="rekening" name="rekening" data-live-search="true">
+                        <option value="">Pilih Rekening</option>
                         @foreach ($rekening as $item)
-                          <option data-tokens="{{$item->norek}}" data-nama="{{$item->atas_nama}}">{{$item->norek}}</option>
+                          <option data-tokens="{{$item->norek}}" data-nama="{{$item->atas_nama}}" value="{{$item->norek}}">{{$item->norek}}</option>
                         @endforeach                                                        
                       </select>                                    
                   </div>                                                     
                   <div class="col-md-6 mb-3 transfer">
                     <label for="">Atas Nama</label>
-                    <input type="text" class="form-control without-arrow" readonly>                         
+                    <input type="text" value="" id="atas_nama" class="form-control without-arrow" readonly>                         
                   </div>                              
               </div>                                                                                                                                                                     
                 </div>                                                                                                                                                           
@@ -136,7 +137,7 @@
                     <a href="#" class="btn-custom btn-custom-success" data-toggle="modal" data-target="#modal_barang"><span class="fa fa-plus"></span> Tambah Barang</a>
                   </div>
                   <div class="p-2 align-self-center">
-                    <p class="text-card" style="margin-bottom: 0">Total Barang : <span class="total-row"></span></p>              
+                    <p class="text-card" id="total_barang" style="margin-bottom: 0">Total Barang : <span class="total-row"></span></p>              
                   </div>                                                            
                   <div class="ml-auto p-2">                          
                      <input class="form-control search-box" type="text" placeholder="Search" aria-label="Search">                                          
@@ -151,8 +152,8 @@
               <th scope="col">Nama Barang</th>                                                                                   
               <th scope="col">Harga Satuan</th>                      
               <th scope="col" width="120px">Jumlah</th>                 
-              <th scope="col">Total Harga</th>                 
-              <th scope="col" width="100px">Diskon</th>        
+              <th scope="col" width="120px">Total Harga</th>                 
+              <th scope="col" width="120px">Diskon</th>        
               <th scope="col" width="170px">Aksi</th>
             </tr>
           </thead>
@@ -197,7 +198,7 @@
             </div>                                                                                            
         </li>      
         </ul>               
-        <div class="custom-card-body-table table-responsive" style="max-height: 440px;">
+        <div class="custom-card-body-table table-responsive">
           <table class="table">
             <thead>
               <tr>                
@@ -246,34 +247,138 @@
     var date = new Date();          
     var dataBarang = [];
     var no_pesanan = '{{$no_pesanan}}';
-    
+    var total_harga = 0;    
+
+    generateNoPesanan();
     function generateNoPesanan() {
-      
+      var year = date.getFullYear().toString(), month = date.getMonth().toString() + 1, day = date.getDate().toString();      
+      if(day.length == 1) day = '0' + day;
+      if(month.length == 1) month = '0' + month;
+      var generateDate = day + month + year;
+      var result = generateDate + '001';      
+      if(no_pesanan != 0)
+        if(no_pesanan.match(/\d{2,8}/g)[0] == day+month+year)
+          result = generateDate + '00' + (parseInt(no_pesanan.match(/\d{2,8}/g)[1]) + 1);            
+      $('#no_pesanan').val(result);      
     }
 
-    $('#tambah_barang').click(function(){                               
+    function countJumlahBayar(){
+      var result = 0;
+      for (const item of $('input.total-harga')) {
+          result += parseInt($(item).val());
+      }
+      $('#jumlah_bayar').val(result);
+    }
+
+    function countTotalDiscount(key){
+      var result = 0;
+      var total_harga = parseInt($('#total_harga'+key).val());
+      var discount = parseInt($('#discount'+key).val());      
+      discount /= 100;      
+      if($('#total_harga'+key).val() != 0 || $('#total_harga'+key).val() != '')
+        $('#total_harga'+key).val(total_harga - (discount * total_harga));
+    }
+    
+    function countJumlahSatuan(e){ 
+      var data, key = $(e).data('key');          
+      for (const item of dataBarang) {            
+        if(item['key'] == key){
+          data = item;              
+        }
+      }       
+      if($(e).val() >= parseInt(data.stok)) $(e).val(data.stok);      
+
+        if($(e).val() > 0 && $(e).val() != '' && $(e).val() != 0){                        
+          $('#total_harga'+key).val($(e).val() * parseInt(data.harga_jual));                                           
+          setDisableDiscount(key, false);                                                          
+        }else if($(e).val() < 0){
+          $(e).val(0);        
+        }else{
+          $('#total_harga'+key).val('');                                           
+        }                             
+
+        countTotalDiscount(key);
+        countJumlahBayar();                      
+    }        
+
+    function checkBarang(){
+      if($('#total_barang').find('span.total-row').text() > 0){
+        $('#jumlah_barang').val($('#total_barang').find('span.total-row').text());
+      }else{
+        $('#jumlah_barang').val('');
+      }        
+    }
+
+    function countDiscount(e){
+      var key = $(e).data('key');      
+      if($(e).val() >= 0){          
+        countTotalDiscount(key);      
+        setTotalDiscount();        
+      }else{
+        $(e).val(0);
+      }                        
+    }
+
+    function setDisableDiscount(key, isEnable){
+      $('#discount'+key).prop('disabled', isEnable);
+    }
+
+    function setTotalDiscount(){
+      var result = 0;
+      for (const item of $('input.discount')) {
+        result += parseInt($(item).val());
+      }      
+      $('#total_diskon').val(result);
+    }
+
+    function bayar(e){      
+      var jumlahBayar = parseInt($('#jumlah_bayar').val());
+      if($(e).val() >= jumlahBayar){
+        $('#kembalian').val($(e).val() - jumlahBayar);
+        $('#status_pembayaran').val('LUNAS');
+      }else if($(e).val() < jumlahBayar){
+        $('#kembalian').val(0);
+        $('#status_pembayaran').val('BELUM LUNAS / CICILAN');
+      }else{
+        $(e).val(0);
+        $('#status_pembayaran').val('BELUM LUNAS / CICILAN');
+      }
+    }    
+
+    // function setAtasNama(e){
+    //   console.log(true);
+    //   $('#atas_nama').val($(e).find('option:selected').data('nama'));
+    // }
+
+    $('#rekening').on('changed.bs.select', function(){
+        console.log(true);
+      $('#atas_nama').val($(this).find('option:selected').data('nama'));
+    })
+
+    $('#tambah_barang').click(function(){                                 
           for (const item of $('input.checkbox-barang:checked')) {
             var getTr = $(item).parent().parent().parent();
             var id_barang = getTr.find('input.id_barang').val();
             var nama_barang = getTr.find('td.nama_barang').text()
             var stok = getTr.find('td.stok').text()
             var harga_jual = getTr.find('td.harga_jual').text()
-            var discount = getTr.find('td.discount').text()
+            var discount = parseInt(getTr.find('td.discount').text())
             var satuan = getTr.find('td.satuan').text()
             $('#fill_barang_table').append(
               '<tr id="data_barang'+getTr.data('key')+'">'+              
-              '<td><input class="id_barang_table" type="hidden" name="id_barang[]" value="'+id_barang+'">'+nama_barang+'</td>                '+
-              '<td>'+harga_jual+'</td>                '+
+              '<td><input class="id_barang_table" type="hidden" name="barang_id[]" value="'+id_barang+'">'+nama_barang+'</td>                '+
+              '<td class="harga-jual" id="harga_jual'+getTr.data('key')+'">'+harga_jual+'</td>                '+
               '<td><div class="input-group input-group-sm mb-3">                        '+
-                      '<input name="jumlah[]" type="number" class="form-control jumlah" value="0" id="jumlah'+getTr.data('key')+'">'+
+                      '<input name="jumlah[]" type="number" oninput="countJumlahSatuan(this)" class="form-control jumlah_barang" value="0" data-key='+getTr.data('key')+'>'+
                       '  <div class="input-group-append">                          '+
                       '      <span class="input-group-text" id="inputGroup-sizing-sm">'+satuan+'</span>'+
                       '    </div>'+
                       '</div></td>'+
-              '<td id="total_harga'+getTr.data('key')+'"></td>'+              
+              '<td>'+
+                '<div class="input-group input-group-sm mb-3"><input type="text" name="total_harga[]" id="total_harga'+getTr.data('key')+'" class="form-control total-harga" readonly required></div></td>'+              
               '<td>'+
                 '<div class="input-group input-group-sm mb-3">                        '+
-                '        <input type="number" value="'+discount+'" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">'+
+                '        <input type="number" name="discount[]" oninput="countDiscount(this)" id="discount'+getTr.data('key')+'" data-key="'+getTr.data('key')+'" value="'+discount+'" class="form-control discount" aria-label="Small" aria-describedby="inputGroup-sizing-sm" disabled="true">'+
                 '        <div class="input-group-append">'+
                 '            <span class="input-group-text" id="inputGroup-sizing-sm">%</span>'+
                 '          </div>'+
@@ -286,18 +391,23 @@
               '      </div>'+
                 '</div>'+
               '</td>'+
-              '</tr>')              
-              dataBarang.push({'key' : getTr.data('key'), 'id_barang' : id_barang, 'nama_barang' : nama_barang, 'stok' : stok, 'harga_jual' : harga_jual, 'discount' : discount, 'satuan' : satuan})
+              '</tr>')                            
+              dataBarang.push({'key' : getTr.data('key'), 'id_barang' : id_barang, 'nama_barang' : nama_barang, 'stok' : stok, 'harga_jual' : harga_jual, 'discount' : discount, 'satuan' : satuan})                                          
               $('#key_barang'+getTr.data('key')).remove();
           }                     
+          setTotalDiscount();     
+          countRowLength();               
+          checkBarang();
         })
 
         function delete_barang(key){                   
           var data;
+          var index = 0;
           for (const item of dataBarang) {            
             if(item['key'] == key){
-              data = item;
+              data = item;              
             }
+            index++;
           }          
 
           $('#fill_barang').append(
@@ -314,8 +424,13 @@
             '<td class="discount">'+data.discount+'</td>'+
             '<td class="satuan">'+data.satuan+'</td>'+
             '</tr>'
-          );                 
-          $('#data_barang'+key).remove();          
+          );                                   
+          dataBarang.splice(index, 1);          
+          $('#data_barang'+key).remove();      
+          countJumlahBayar();
+          setTotalDiscount();
+          countRowLength();          
+          checkBarang();
         }
     
     updateDate(updateDateTransaction, updateDatePay);
@@ -328,8 +443,10 @@
 
       $('#method_payment').change(function(){
         $('.transfer').hide();
+        $('#rekening').prop('required', false);
         if($(this).val() == "transfer"){
           $('.transfer').show();
+          $('#rekening').prop('required', true);
         }
       });
 
@@ -350,10 +467,6 @@
         var dateNow = date.getFullYear() + '-' + getMonth + '-' + getDate + 'T' + getHours + ':' + getMinutes;
         if(transaction) $('#transaction_date').val(dateNow);        
         if(pay) $('#pay_date').val(dateNow);
-      }
-
-      // for (const item of $('div.modal')){
-      //   $(item)
-      // }
+      }      
     </script>
 @endpush

@@ -6,6 +6,15 @@
     Barang
 @endsection
 @section('content')
+@if (count($alert) > 0)
+<div class="col-12">
+  <div class="alert alert-danger" role="alert">
+    @foreach ($alert as $item)
+        <li>{{$item}}</li>
+    @endforeach
+  </div>
+</div>
+@endif
 <div class="col-12">
     <div class="custom-card">                  
       <div class="custom-card-header with-tools">                                                                  
@@ -74,7 +83,7 @@
       </div>
       <div class="d-flex mt-2">
         <div class="align-self-center p-2">
-          <p class="text-card" style="margin-bottom: 0">Total Barang Masuk : <span class="total-row"></span></p>              
+          <p class="text-card" style="margin-bottom: 0">Total Barang : <span class="total-row"></span></p>              
         </div>
         <div class="ml-auto p-2">
           <nav class="pagination-table" aria-label="Page navigation example">

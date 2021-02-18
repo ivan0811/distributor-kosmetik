@@ -87,16 +87,19 @@ $("input.search-box").keyup(function() {
   });
 });
 
-for (const x of $('tbody.search-table')) {  
-  var table = $('tbody.search-table');  
-  var lengthTable = $(x).find('tr').length;
-  var lengthColumn = $(x).parent().find('thead > tr > th').length;
-  var i = table.index(x);
-  $($('span.total-row')[i]).text(lengthTable);        
-  if(lengthTable < 1){
-    $(x).find('tr').append('<td colspan='+lengthColumn+'>Tidak Ada Data</td>');
+countRowLength();
+function countRowLength(){
+  for (const x of $('tbody.search-table')) {  
+    var table = $('tbody.search-table');  
+    var lengthTable = $(x).find('tr').length;
+    var lengthColumn = $(x).parent().find('thead > tr > th').length;
+    var i = table.index(x);
+    $($('span.total-row')[i]).text(lengthTable);        
+    if(lengthTable < 1){
+      $(x).find('tr').append('<td colspan='+lengthColumn+'>Tidak Ada Data</td>');
+    }
+    addNavigationTable(i, lengthTable)
   }
-  addNavigationTable(i, lengthTable)
 }
 
 function createPagination(addNumber){

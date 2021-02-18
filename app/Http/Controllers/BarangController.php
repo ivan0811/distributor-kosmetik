@@ -18,8 +18,11 @@ class BarangController extends MessageController
         $barang = barang::all();
         $barangMasuk = barangMasuk::all();
         $barangKeluar = barangKeluar::all();
-        $confirmModal = $this->deleteConfirm('user', 'modal_delete', 'btn_delete');
-        return view('barang.barang', compact('barang', 'barangMasuk', 'barangKeluar', 'confirmModal'));
+        $alert = collect();
+        if(count(Pemasok::all()) == 0) $alert->push('data pemasok masih kosong');
+        if(count(Barang::all()) == 0) $alert->push('data barang masih kosong');
+                
+        return view('barang.barang', compact('barang', 'barangMasuk', 'barangKeluar', 'alert'));
     }
 
     function createBarang(){ 
@@ -130,6 +133,12 @@ class BarangController extends MessageController
         $barangMasuk = barangMasuk::all();                  
         $barang = barang::all();
         $pemasok = pemasok::all();
+
+        if(count($pemasok) == 0|| count($barang) == 0){
+            $toast = $this->dangerToast('tidak bisa menambahkan barang masuk, cek kembali yang data kosong!');                                
+            return redirect()->back()->with('status', $toast);
+        }        
+
         return view('barang.create_barang_masuk', compact('barangMasuk', 'barang', 'pemasok'));        
     }
     
@@ -180,7 +189,12 @@ class BarangController extends MessageController
 
     // barang keluar
     function createBarangKeluar(){ 
-        $barangKeluar = barangKeluar::all();                  
+        $barangKeluar = barangKeluar::all();     
+        $barang = barang::all();
+        if(count($barang) == 0){
+            $toast = $this->dangerToast('tidak bisa menambahkan barang keluar, cek kembali yang data kosong!');                                
+            return redirect()->back()->with('status', $toast);
+        }                     
         return view('barang.create_barang_keluar', compact('barangKeluar'));        
     }
 

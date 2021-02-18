@@ -56,7 +56,11 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::prefix('/transaksi')->group(function(){
         Route::get('/', 'TransaksiController@transaksi')->name('transaksi');   
         Route::get('/create-transaksi', 'TransaksiController@createTransaksi')->name('create_transaksi');
-    });
+        Route::post('/store-transaksi', 'TransaksiController@storeTransaksi')->name('store_transaksi');        
+        Route::get('/edit-transaksi/{no_pesanan}', 'TransaksiController@editTransaksi')->name('edit_transaksi');
+        Route::patch('/update-transaksi', 'TransaksiController@updateTransaksi')->name('update_transaksi');
+        Route::delete('/delete-transaksi/{no_pesanan}', 'TransaksiController@deleteTransaksi')->name('delete_transaksi');         
+    });    
     
     //crud pemasok
     Route::prefix('/pemasok')->group(function(){

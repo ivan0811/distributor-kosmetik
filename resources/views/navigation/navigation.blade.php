@@ -120,7 +120,15 @@
                       User
                     </p>
                   </a>
-                  </li>      
+                  </li>    
+                  <li class="navbar-item {{Request::segment(1) == 'user' ? 'active' : ''}}">
+                    <a href="{{route('user')}}" class="btn-custom-menu">
+                    <span class="fa fa-file-alt"></span>
+                    <p class="custom-menu-text">                                          
+                      Laporan
+                    </p>
+                  </a>
+                  </li>    
                 @endif                
                 </ul>
             </div>

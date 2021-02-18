@@ -11,11 +11,18 @@ class RekeningController extends MessageController
     function rekening(){
         $rekening = rekening::all();
         $confirmModal = $this->deleteConfirm('user', 'modal_delete', 'btn_delete');
-        return view('rekening.rekening', compact('rekening','confirmModal'));
+        $alert = collect();
+        if(count(bank::all()) == 0) $alert->push('data bank masih kosong');        
+
+        return view('rekening.rekening', compact('rekening','confirmModal', 'alert'));
     }
 
     function createRekening(){
-        $bank = Bank::all();
+        $bank = Bank::all();        
+        if(count($bank) == 0){
+            $toast = $this->dangerToast('tidak bisa menambahkan rekening masuk, data bank kosong!');                                
+            return redirect()->back()->with('status', $toast);
+        }        
         return view('rekening.create_rekening', compact('bank'));
     }
 

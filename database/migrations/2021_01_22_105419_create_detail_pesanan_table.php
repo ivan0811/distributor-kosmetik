@@ -16,10 +16,10 @@ class CreateDetailPesananTable extends Migration
         Schema::create('detail_pesanan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('no_pesanan')->unsigned();
-            $table->bigInteger('barang_id')->unsigned();            
-            $table->integer('satuan');                        
+            $table->bigInteger('barang_id')->unsigned();                                           
             $table->integer('qty');
-            $table->integer('total_harga');
+            $table->double('discount');
+            $table->integer('total_harga');            
             $table->timestamps();
 
             $table->foreign('no_pesanan')
