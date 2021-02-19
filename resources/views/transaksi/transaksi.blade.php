@@ -72,7 +72,7 @@
                 <td>{{$countBarang[$key]->count}}</td>   
                 <td>{{$item->total_harga}}</td>   
                 <td>{{$status_pembayaran}}</td>  
-                <td>{{$item->created_at}}</td>                                             
+                <td>{{$item->updated_at}}</td>                                             
                 <td>                  
                     <form action="{{route('delete_transaksi', $item->no_pesanan)}}" method="POST" id="delete_user{{$item->no_pesanan}}">
                       {{ csrf_field() }}

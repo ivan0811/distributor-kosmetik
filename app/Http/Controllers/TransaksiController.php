@@ -78,7 +78,8 @@ class TransaksiController extends MessageController
             'toko_id' => $request->toko_id,
             'sales_id' => $request->sales_id,
             'total_harga' => $request->jumlah_pembayaran,
-            'created_at' => $transaksi_date
+            'created_at' => $transaksi_date,
+            'updated_at' => $transaksi_date
         ]);
 
         pembayaran::create([
@@ -86,7 +87,9 @@ class TransaksiController extends MessageController
             'no_pesanan' => $request->no_pesanan,
             'jumlah_pembayaran' => $request->total_bayar,
             'metode_pembayaran' => $request->metode_pembayaran,
-            'status_pembayaran' => $status_pembayaran            
+            'status_pembayaran' => $status_pembayaran,   
+            'created_at' => $transaksi_date,
+            'updated_at' => $transaksi_date         
         ]);
 
         foreach ($request->barang_id as $key => $value) {
@@ -96,7 +99,7 @@ class TransaksiController extends MessageController
                 'qty' => $request->jumlah[$key],                
                 'total_harga' => $request->total_harga[$key],
                 'discount' => $request->discount[$key] / 100
-            ]);                
+            ]);                                  
 
             BarangKeluar::create([
                 'barang_id' => $value,

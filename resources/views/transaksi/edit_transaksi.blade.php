@@ -289,8 +289,8 @@
 @endsection
 @push('scripts')
     <script>  
-    var updateDateTransaction = true;
-    var updateDatePay = true;
+    var updateDateTransaction = false;
+    var updateDatePay = false;
     var date = new Date();          
     var dataBarang = $.parseJSON('{!! $dataBarang !!}');  
     var total_harga = 0;     
@@ -469,6 +469,14 @@
           countRowLength();          
           checkBarang();
         }
+
+        $('#transaction_date').change(function(){
+          updateDateTransaction = false;
+        });
+
+        $('#pay_date').change(function(){
+          updateDatePay = false;
+        });
     
     updateDate(updateDateTransaction, updateDatePay);
 

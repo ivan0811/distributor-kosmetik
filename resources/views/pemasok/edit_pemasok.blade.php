@@ -21,8 +21,9 @@
           </div>
       @endif                       
       <div class="custom-card-body">                                                                  
-          <form action="{{route('store_pemasok')}}" id="form_pemasok" method="POST">       
+          <form action="{{route('update_pemasok')}}" id="form_pemasok" method="POST">       
             {{ csrf_field() }}
+            {{ method_field('PATCH') }}
             <div class="container-fluid">
                 <div class="form-group row">                          
                   <label class="col-sm-2 col-form-label" for="nama">Kode Pabrik</label>
@@ -33,13 +34,13 @@
                 <div class="form-group row">                          
                   <label class="col-sm-2 col-form-label" for="nama">Nama Pemasok</label>
                   <div class="col-sm-10">
-                    <input type="String" name="nama_pemasok" value="{{$pemasok->nama}}" class="form-control" id="kode_pabrik" placeholder="Nama Pemasok" required>                    
+                    <input type="text" name="nama" value="{{$pemasok->nama}}" class="form-control" id="kode_pabrik" placeholder="Nama Pemasok" required>                    
                   </div>                  
                 </div>                      
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Rekening</label> 
                   <div class="col-sm-10">
-                    <select class="form-control" id="provinsi" name="rekening" required>
+                    <select class="form-control" id="rekening" name="norek">
                       <option value="" selected>Pilih Rekening</option>       
                       @foreach ($rekening as $item) 
                       @if ($item->norek == $pemasok->norek)
@@ -52,10 +53,10 @@
                   </div>
                 </div> 
                   <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="kabupaten">Kabupaten / Kota</label>
+                    <label class="col-sm-2 col-form-label" for="provinsi">Provinsi</label>
                     <div class="col-sm-10">
-                      <select class="form-control" id="kabupaten" name="kabupaten" required>
-                        <option value="" selected>Pilih Kabupaten / Kota</option>       
+                      <select class="form-control" id="provinsi" name="provinsi" required>
+                        <option value="" selected>Pilih Provinsi</option>       
                         @foreach ($getProvinsi as $item)
                           @if ($item->nama == $pemasok->provinsi)
                             <option data-id="{{$item->id}}" value="{{$item->nama}}" selected>{{$item->nama}}</option>
@@ -71,7 +72,7 @@
                     <div class="col-sm-10">
                       <select class="form-control" id="kabupaten" name="kabupaten" required>
                         <option value="" selected>Pilih Kabupaten / Kota</option>                                                       
-                            
+                        <option data-id="{{$pemasok->id}}" value="{{$pemasok->kabupaten}}" selected>{{$pemasok->kabupaten}}</option>   
                       </select>
                     </div>                    
                   </div>                       
@@ -80,13 +81,14 @@
                     <div class="col-sm-10">
                       <select class="form-control" id="kecamatan" name="kecamatan" required>
                         <option value="" selected>Pilih Kecamatan</option>                    
+                        <option value="{{$pemasok->kecamatan}}" selected>{{$pemasok->kecamatan}}</option>   
                       </select>
                     </div>                    
                   </div>   
                     <div class="form-group row">
                       <label class="col-sm-2 col-form-label" for="alamat">Alamat</label>
                       <div class="col-sm-10">
-                        <textarea class="form-control" value="{{$pemasok->alamat}}" placeholder="Masukkan alamat" id="alamat" style="height: 100px"></textarea>
+                        <textarea class="form-control" name="alamat" value="{{$pemasok->alamat}}" placeholder="Masukkan alamat" id="alamat" style="height: 100px"></textarea>
                       </div>
                     </div>                                                                                                                                                                                                                                                                                                        
               <div class="footer-card-btn">
@@ -100,15 +102,46 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">    
+    $('#provinsi').change(function(){
+        $('#kabupaten').empty();
+        $('#kabupaten').append('<option selected>Pilih Kabupaten /Kota</option>');
+        setKabupaten($(this).find(':selected').data('id'));
+    });  
+
     $('#kabupaten').change(function(){
         $('#kecamatan').empty();
         $('#kecamatan').append('<option selected>Pilih Kecamatan</option>');
         setKecamatan($(this).find(':selected').data('id'));
-    });      
-    setKecamatan($('#kabupaten').find(':selected').data('id'), '{{$user->kecamatan}}');  
-    function setKecamatan(id, selected = ''){
+    });  
+    setKabupaten($('#provinsi').find(':selected').data('id'), '{{$pemasok->kabupaten}}');  
+    function setKabupaten(id, selected = ''){      
       $.ajax({        
             'url' : '{{route('get_kabupaten')}}',
+            'type' : 'POST',        
+            'data' : {
+                '_token' : '{{csrf_token()}}',
+                'provinsi' : id
+            },
+            'success' : function(data){                                                 
+                var item = $.parseJSON(data).kota_kabupaten;                                
+                for (const x of item) {
+                  if(selected == x.nama){  
+                    $('#kabupaten').append('<option data-id="'+x.id+'" value="'+x.nama+'">'+x.nama+'</option>');                                      
+                    continue;
+                  }                    
+                  $('#kabupaten').append('<option data-id="'+x.id+'" value="'+x.nama+'">'+x.nama+'</option>');                    
+                }
+            },
+            'error' : function(data){
+                console.log(data);  
+            }
+        });       
+    }
+
+    setKecamatan($('#kabupaten').find(':selected').data('id'), '{{$pemasok->kecamatan}}');  
+    function setKecamatan(id, selected = ''){
+      $.ajax({        
+            'url' : '{{route('get_kecamatan')}}',
             'type' : 'POST',        
             'data' : {
                 '_token' : '{{csrf_token()}}',
@@ -117,10 +150,10 @@
             'success' : function(data){                       
                 var item = $.parseJSON(data).kecamatan;                
                 for (const x of item) {
-                  if(selected == x.nama){                    
+                  if(selected == x.nama){                        
                     continue;
                   }                    
-                  $('#kecamatan').append('<option value="'+x.nama+'">'+x.nama+'</option>');                    
+                  $('#kecamatan').append('<option data-id="'+x.id+'" value="'+x.nama+'">'+x.nama+'</option>');                    
                 }
             },
             'error' : function(data){

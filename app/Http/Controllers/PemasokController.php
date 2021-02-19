@@ -35,11 +35,12 @@ class PemasokController extends APIController
     }   
 
     function editPemasok($kode_pabrik){
-        $pemasok = pemasok::where('kode_pabrik', $kode_pabrik);
+        $pemasok = pemasok::where('kode_pabrik', $kode_pabrik)->first();
         $getProvinsi = $this->getProvinsi;      
         $rekening = rekening::all();        
         $confirmModal = $this->saveConfirm('pemasok', route('pemasok'), 'confirm_modal', 'btn_submit');        
-        return view('pemasok.edit_pemasok', compact('pemasok', 'getProvinsi', 'confirmModal'));
+        // print_r($pemasok);
+        return view('pemasok.edit_pemasok', compact('pemasok', 'getProvinsi', 'rekening'));
     }
 
     function updatePemasok(Request $request){

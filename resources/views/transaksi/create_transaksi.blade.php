@@ -434,6 +434,14 @@
           countRowLength();          
           checkBarang();
         }
+
+        $('#transaction_date').change(function(){
+          updateDateTransaction = false;
+        });
+
+        $('#pay_date').change(function(){
+          updateDatePay = false;
+        });
     
     updateDate(updateDateTransaction, updateDatePay);
 

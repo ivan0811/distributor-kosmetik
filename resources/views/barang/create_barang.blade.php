@@ -54,7 +54,7 @@
                     <div class="form-group row">
                       <label class="col-sm-2 col-form-label" for="discount">Discount</label> 
                       <div class="input-group col-sm-2">
-                        <input type="number" name="discount" class="form-control" id="discount" placeholder="Discount" required>
+                        <input type="number" name="discount" value="0" class="form-control" id="discount" placeholder="Discount" required>
                         <div class="input-group-append">
                           <span class="input-group-text">%</span>                          
                         </div>

@@ -33,13 +33,13 @@
                 <div class="form-group row">                          
                   <label class="col-sm-2 col-form-label" for="nama">Nama Pemasok</label>
                   <div class="col-sm-10">
-                    <input type="String" name="nama_pemasok" class="form-control" id="kode_pabrik" placeholder="Nama Pemasok" required>                    
+                    <input type="text" name="nama" class="form-control" id="kode_pabrik" placeholder="Nama Pemasok" required>                    
                   </div>                  
                 </div>                      
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Rekening</label> 
                   <div class="col-sm-10">
-                    <select class="form-control" id="provinsi" name="provinsi" required>
+                    <select class="form-control" id="rekening" name="norek">
                       <option value="" selected>Pilih Rekening</option>       
                       @foreach ($rekening as $item) 
                           <option value="{{$item->norek}}">{{$item->norek}}</option>
@@ -91,9 +91,10 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">    
+
   $('#provinsi').change(function(){
       $('#kabupaten').empty();
-      $('#kabupaten').append('<option selected>Pilih Kabupaten / Kota</option>');
+      $('#kabupaten').append('<option selected>Pilih Kabupaten / Kota</option>');      
       $.ajax({        
           'url' : '{{route('get_kabupaten')}}',
           'type' : 'POST',        
@@ -101,8 +102,7 @@
               '_token' : '{{csrf_token()}}',
               'provinsi' : $(this).find(':selected').data('id')
           },
-          'success' : function(data){
-              // console.log(data);                
+          'success' : function(data){                       
               var item = $.parseJSON(data).kota_kabupaten;
               // console.log(item.nama);                
               for (const x of item) {

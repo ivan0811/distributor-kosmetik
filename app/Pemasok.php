@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pemasok extends Model
 {
     protected $table = 'pemasok';
-    protected $fillable = ['kode_pabrik', 'provinsi', 'kabupaten', 'kecamatan', 'alamat'];
+    protected $fillable = ['kode_pabrik', 'norek', 'nama', 'provinsi', 'kabupaten', 'kecamatan', 'alamat'];
     
     /**
      * Get all of the comments for the Pemasok

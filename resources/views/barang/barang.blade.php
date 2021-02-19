@@ -228,8 +228,8 @@
             @foreach ($barangKeluar as $key => $item)              
             <tr>                                         
                 <th scope="row">{{$no++}}</th>
-                <td></td>
-                {{-- <td>{{$item->detailPesanan->pesanan->no_pesanan}}</td> --}}
+                {{-- <td></td> --}}
+                <td>{{$item->detail_pesanan_id != null ? $item->detailPesanan->no_pesanan : 'Tidak Ada'}}</td>
                 <td>{{$item->barang->nama}}</td>                
                 <td>{{$item->jumlah}}</td>                                                                       
                 <td>                  
