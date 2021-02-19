@@ -30,6 +30,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Kode Pabrik</th>                                                                     
+              <th scope="col">Nama Pemasok</th>     
               <th scope="col">Provinsi</th>
               <th scope="col">Kabupaten</th>
               <th scope="col">Kecamatan</th>
@@ -45,6 +46,7 @@
             <tr>                                         
                 <th scope="row">{{$no++}}</th>
                 <td>{{$item->kode_pabrik}}</td>                
+                <td>{{$item->nama}}</td>             
                 <td>{{$item->provinsi}}</td>                
                 <td>{{$item->kabupaten}}</td>
                 <td>{{$item->kecamatan}}</td>

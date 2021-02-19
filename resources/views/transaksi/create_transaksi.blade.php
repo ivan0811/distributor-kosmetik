@@ -37,23 +37,7 @@
                   <label for="">Nama Toko</label>
                     <select name="toko_id" id="" class="form-control" required>
                       <option value="">Pilih Toko</option>                                                       
-                      @foreach ($toko as $key => $item)     
-                      @php
-                          $status_pembayaran = '';
-                      @endphp           
-                        @foreach ($pesanan as $val)
-                            @if ($val->toko_id == $item->id)
-                                @php
-                                    $status_pembayaran = $pembayaran[$val->no_pesanan]
-                                    ->sortByDesc('created_at')
-                                    ->first()
-                                    ->status_pembayaran
-                                @endphp                                   
-                            @endif                                       
-                        @endforeach     
-                        @if ($status_pembayaran == 'BELUM LUNAS')                                                                                                                      
-                          @continue
-                        @endif                                                                                                                    
+                      @foreach ($toko as $key => $item)                                                                                                                                          
                         <option value="{{$item->id}}">{{$item->nama}}</option>                        
                       @endforeach
                     </select>                  
@@ -100,7 +84,7 @@
                 </div>
                 <div class="col-md-12 mb-3">
                   <label for="">Status Pembayaran</label>
-                  <input id="status_pembayaran" value="status_pembayaran" type="text" value="BELUM LUNAS / CICILAN" class="form-control" readonly>
+                  <input id="status_pembayaran" type="text" value="BELUM LUNAS / CICILAN" class="form-control" readonly>
                 </div>   
                 <div class="col-md-6 mb-3">
                   <label for="">Tanggal Pembayaran</label>
@@ -267,7 +251,9 @@
 
     generateNoPesanan();
     function generateNoPesanan() {
-      var year = date.getFullYear().toString(), month = date.getMonth().toString() + 1, day = date.getDate().toString();      
+      var year = date.getFullYear().toString(), month = date.getMonth().toString(), day = date.getDate().toString();      
+      month = parseInt(month) + 1;
+      month = month.toString();
       if(day.length == 1) day = '0' + day;
       if(month.length == 1) month = '0' + month;
       var generateDate = day + month + year;

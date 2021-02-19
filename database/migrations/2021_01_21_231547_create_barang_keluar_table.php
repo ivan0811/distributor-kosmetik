@@ -16,7 +16,7 @@ class CreateBarangKeluarTable extends Migration
         Schema::create('barang_keluar', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('barang_id')->unsigned();
-            $table->bigInteger('detail_pesanan_id')->unsigned()->nullable();
+            $table->bigInteger('detail_pesanan_id')->unsigned()->nullable()->default(null);
             $table->integer('jumlah');
             $table->timestamps();
 

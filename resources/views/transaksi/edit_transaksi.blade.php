@@ -182,7 +182,7 @@
                 </td>               
                <td class="harga-jual" id="harga_jual{{$item->barang_id}}">{{$item->barang->harga_jual}}</td>               
                <td><div class="input-group input-group-sm mb-3">                       
-                       <input name="jumlah[]" type="number" oninput="countJumlahSatuan(this)" class="form-control jumlah_barang" value="{{$item->qty}}" data-key="">
+                       <input name="jumlah[]" type="number" oninput="countJumlahSatuan(this)" class="form-control jumlah_barang" value="{{$item->qty}}" data-key="{{$item->barang_id}}">
                          <div class="input-group-append">                         
                              <span class="input-group-text" id="inputGroup-sizing-sm">{{$item->barang->satuan->nama}}</span>
                            </div>
@@ -315,9 +315,10 @@
       var data, key = $(e).data('key');          
       for (const item of dataBarang) {            
         if(item['key'] == key){
-          data = item;              
+          data = item;                        
         }
       }       
+
       if($(e).val() >= parseInt(data.stok)) $(e).val(data.stok);      
 
         if($(e).val() > 0 && $(e).val() != '' && $(e).val() != 0){                        
@@ -327,9 +328,9 @@
           $(e).val(0);        
         }else{
           $('#total_harga'+key).val('');                                           
-        }                             
-
-        countTotalDiscount(key);
+        }     
+        
+        countTotalDiscount(key);        
         countJumlahBayar();                      
     }        
 
@@ -344,7 +345,7 @@
 
     function countDiscount(e){
       var key = $(e).data('key');      
-      if($(e).val() >= 0){          
+      if($(e).val() > 0){          
         countTotalDiscount(key);      
         setTotalDiscount();        
       }else{

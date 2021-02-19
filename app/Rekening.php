@@ -17,5 +17,10 @@ class Rekening extends Model
     public function pembayaran()
     {
         return $this->hasMany(Pembayaran::class, 'norek');
-    }    
+    }
+        
+    public function Pemasok()
+    {
+        return $this->hasMany(Pemasok::class, 'norek');
+    }
 }

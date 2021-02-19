@@ -143,7 +143,7 @@
         $('#kecamatan').empty();
         $('#kecamatan').append('<option value="" selected>Pilih Kecamatan</option>');
         $.ajax({        
-            'url' : '{{route('get_kecataman')}}',
+            'url' : '{{route('get_kecamatan')}}',
             'type' : 'POST',        
             'data' : {
                 '_token' : '{{csrf_token()}}',

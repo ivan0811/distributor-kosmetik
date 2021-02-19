@@ -90,7 +90,7 @@ class TransaksiController extends MessageController
         ]);
 
         foreach ($request->barang_id as $key => $value) {
-            $detail_pesanan_id = DetailPesanan::insertGetId([
+            $detail_pesanan_id = DB::table('detail_pesanan')->insertGetId([
                 'no_pesanan' => $request->no_pesanan,
                 'barang_id' => $value,                
                 'qty' => $request->jumlah[$key],                
@@ -189,7 +189,7 @@ class TransaksiController extends MessageController
                 $id_detail_pesanan[] = $request->id_detail[$key];
             }else{
                 //create                
-                $detail_pesanan_id = DetailPesanan::insertGetId([
+                $detail_pesanan_id = DB::table('detail_pesanan')->insertGetId([
                     'no_pesanan' => $request->no_pesanan,
                     'barang_id' => $value,                
                     'qty' => $request->jumlah[$key],                

@@ -19,8 +19,8 @@ class UserController extends APIController
     }
 
     function createUser() {        
-        $getProvinsi = $this->getProvinsi;            
-        return view('user.create_user', compact('getProvinsi'))->with('status', $getProvinsi);
+        $getKabupaten = $this->getKabupaten;            
+        return view('user.create_user', compact('getKabupaten'));
     }    
 
     function storeUser(Request $request){        

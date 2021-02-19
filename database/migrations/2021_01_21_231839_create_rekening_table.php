@@ -25,6 +25,10 @@ class CreateRekeningTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });
+
+        Schema::table('pemasok', function (Blueprint $table){
+            $table->foreign('norek')->references('norek')->on('rekening')->onDelete('set null');
+        });
     }
 
     /**
@@ -34,6 +38,9 @@ class CreateRekeningTable extends Migration
      */
     public function down()
     {
+        Schema::table('pemasok', function (Blueprint $table) {
+            $table->dropForeign('pemasok_norek_foreign'); 
+        });
         Schema::dropIfExists('rekening');
     }
 }

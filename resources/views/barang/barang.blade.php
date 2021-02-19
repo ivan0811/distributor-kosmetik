@@ -46,7 +46,7 @@
           <thead>
             <tr>
               <th scope="col">No</th>
-              {{-- <th scope="col">Pilih</th>        --}}
+              <th scope="col">Id</th>       
               <th scope="col">Kode BPOM</th>       
               <th scope="col">Nama Barang</th>              
               <th scope="col">Stok</th>                                           
@@ -71,6 +71,7 @@
                     <label class="custom-control-label" for="barang{{$key}}"></label>
                   </div>
                 </td> --}}
+                <td>{{$item->id}}</td>         
                 <td>{{$item->kode_bpom}}</td>         
                 <td>{{$item->nama}}</td>                
                 <td>{{$item->stok}}</td>                

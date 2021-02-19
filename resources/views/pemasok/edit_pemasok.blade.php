@@ -27,20 +27,54 @@
                 <div class="form-group row">                          
                   <label class="col-sm-2 col-form-label" for="nama">Kode Pabrik</label>
                   <div class="col-sm-10">
-                    <input type="number" name="kode_pabrik" class="form-control" id="kode_pabrik" placeholder="Kode Pabrik" required>                    
+                    <input type="number" value="{{$pemasok->kode_pabrik}}" name="kode_pabrik" class="form-control" id="kode_pabrik" placeholder="Kode Pabrik" required>                    
                   </div>                  
                 </div>                                      
+                <div class="form-group row">                          
+                  <label class="col-sm-2 col-form-label" for="nama">Nama Pemasok</label>
+                  <div class="col-sm-10">
+                    <input type="String" name="nama_pemasok" value="{{$pemasok->nama}}" class="form-control" id="kode_pabrik" placeholder="Nama Pemasok" required>                    
+                  </div>                  
+                </div>                      
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Rekening</label> 
+                  <div class="col-sm-10">
+                    <select class="form-control" id="provinsi" name="rekening" required>
+                      <option value="" selected>Pilih Rekening</option>       
+                      @foreach ($rekening as $item) 
+                      @if ($item->norek == $pemasok->norek)
+                        <option value="{{$item->norek}}" selected>{{$item->norek}}</option>
+                        @continue
+                      @endif
+                          <option value="{{$item->norek}}">{{$item->norek}}</option>
+                       @endforeach                                                                       
+                    </select>
+                  </div>
+                </div> 
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="kabupaten">Kabupaten / Kota</label>
                     <div class="col-sm-10">
                       <select class="form-control" id="kabupaten" name="kabupaten" required>
                         <option value="" selected>Pilih Kabupaten / Kota</option>       
-                        @foreach ($getProvinsi as $item) --}}
+                        @foreach ($getProvinsi as $item)
+                          @if ($item->nama == $pemasok->provinsi)
+                            <option data-id="{{$item->id}}" value="{{$item->nama}}" selected>{{$item->nama}}</option>
+                            @continue
+                          @endif
                             <option data-id="{{$item->id}}" value="{{$item->nama}}">{{$item->nama}}</option>
                          @endforeach                                                                       
                       </select>
                     </div>                    
-                  </div>       
+                  </div>  
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="kabupaten">Kabupaten / Kota</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="kabupaten" name="kabupaten" required>
+                        <option value="" selected>Pilih Kabupaten / Kota</option>                                                       
+                            
+                      </select>
+                    </div>                    
+                  </div>                       
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="kecamatan">Kecamatan</label>
                     <div class="col-sm-10">
@@ -52,7 +86,7 @@
                     <div class="form-group row">
                       <label class="col-sm-2 col-form-label" for="alamat">Alamat</label>
                       <div class="col-sm-10">
-                        <textarea class="form-control" placeholder="Masukkan alamat" id="alamat" style="height: 100px"></textarea>
+                        <textarea class="form-control" value="{{$pemasok->alamat}}" placeholder="Masukkan alamat" id="alamat" style="height: 100px"></textarea>
                       </div>
                     </div>                                                                                                                                                                                                                                                                                                        
               <div class="footer-card-btn">

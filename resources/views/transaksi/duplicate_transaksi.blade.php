@@ -300,9 +300,11 @@
 
     generateNoPesanan();
     function generateNoPesanan() {
-      var year = date.getFullYear().toString(), month = date.getMonth().toString() + 1, day = date.getDate().toString();      
+      var year = date.getFullYear().toString(), month = date.getMonth().toString(), day = date.getDate().toString();      
+      month = parseInt(month) + 1;
+      month = month.toString();
       if(day.length == 1) day = '0' + day;
-      if(month.length == 1) month = '0' + month;
+      if(month.length == 1) month = '0' + month;      
       var generateDate = day + month + year;
       var result = generateDate + '001';      
       var no_pesanan = '{{$no_pesanan}}';
@@ -364,7 +366,7 @@
 
     function countDiscount(e){
       var key = $(e).data('key');      
-      if($(e).val() >= 0){          
+      if($(e).val() > 0){          
         countTotalDiscount(key);      
         setTotalDiscount();        
       }else{

@@ -18,4 +18,14 @@ class Pemasok extends Model
     {
         return $this->hasMany(BarangMasuk::class, 'kode_pabrik');
     }
+
+    /**
+     * Get the user that owns the Pemasok
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function Rekening()
+    {
+        return $this->belongsTo(rekening::class);
+    }
 }

@@ -30,6 +30,23 @@
                     <input type="number" name="kode_pabrik" class="form-control" id="kode_pabrik" placeholder="Kode Pabrik" required>                    
                   </div>                  
                 </div>                      
+                <div class="form-group row">                          
+                  <label class="col-sm-2 col-form-label" for="nama">Nama Pemasok</label>
+                  <div class="col-sm-10">
+                    <input type="String" name="nama_pemasok" class="form-control" id="kode_pabrik" placeholder="Nama Pemasok" required>                    
+                  </div>                  
+                </div>                      
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Rekening</label> 
+                  <div class="col-sm-10">
+                    <select class="form-control" id="provinsi" name="provinsi" required>
+                      <option value="" selected>Pilih Rekening</option>       
+                      @foreach ($rekening as $item) 
+                          <option value="{{$item->norek}}">{{$item->norek}}</option>
+                       @endforeach                                                                       
+                    </select>
+                  </div>
+                </div> 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Provinsi</label> 
                     <div class="col-sm-10">
