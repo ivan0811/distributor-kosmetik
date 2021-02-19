@@ -36,8 +36,24 @@
                 <div class="col-md-12 mb-3">
                   <label for="">Nama Toko</label>
                     <select name="toko_id" id="" class="form-control" required>
-                      <option value="">Pilih Toko</option>
-                      @foreach ($toko as $item)
+                      <option value="">Pilih Toko</option>                                                       
+                      @foreach ($toko as $key => $item)     
+                      @php
+                          $status_pembayaran = '';
+                      @endphp           
+                        @foreach ($pesanan as $val)
+                            @if ($val->toko_id == $item->id)
+                                @php
+                                    $status_pembayaran = $pembayaran[$val->no_pesanan]
+                                    ->sortByDesc('created_at')
+                                    ->first()
+                                    ->status_pembayaran
+                                @endphp                                   
+                            @endif                                       
+                        @endforeach     
+                        @if ($status_pembayaran == 'BELUM LUNAS')                                                                                                                      
+                          @continue
+                        @endif                                                                                                                    
                         <option value="{{$item->id}}">{{$item->nama}}</option>                        
                       @endforeach
                     </select>                  
@@ -84,7 +100,7 @@
                 </div>
                 <div class="col-md-12 mb-3">
                   <label for="">Status Pembayaran</label>
-                  <input id="status_pembayaran" type="text" value="BELUM LUNAS / CICILAN" class="form-control" readonly>
+                  <input id="status_pembayaran" value="status_pembayaran" type="text" value="BELUM LUNAS / CICILAN" class="form-control" readonly>
                 </div>   
                 <div class="col-md-6 mb-3">
                   <label for="">Tanggal Pembayaran</label>

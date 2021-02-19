@@ -7,5 +7,6 @@
 @endsection
 @section('content')
 {{-- Selamat Datang kembali {{\Auth::user()->username}} --}}
+
 @endsection
 

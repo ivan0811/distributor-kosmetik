@@ -24,29 +24,33 @@
           <form action="{{route('update_barang_masuk')}}" id="form_barang" method="POST">       
             {{ csrf_field() }}
             {{ method_field('PATCH')}}
-            <input type="hidden" name="id" value="{{$barangMasuk->barang_id}}">
+            <input type="hidden" name="barang_id" value="{{$barangMasuk->id}}">
             <div class="container-fluid">
                 <div class="form-group row">                          
                   <label class="col-sm-2 col-form-label" for="barang_id">Barang Id</label>
                   <div class="col-sm-10">
-                    <input type="text" name="barang_id" class="form-control" value="{{$barangMasuk->barang_id}}" id="nama" placeholder="Masukkan Id Barang" required>                    
+                    <input type="text" name="" class="form-control" value="{{$barangMasuk->barang->nama}}" id="nama" placeholder="Masukkan Id Barang" required>                    
                   </div>                  
                 </div>                      
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="kode_pabrik">Kode Pabrik</label> 
-                    <div class="col-sm-10">
-                      <input type="number" name="kode_pabrik" value="{{$barangMasuk->kode_pabrik}}" class="form-control" id="kode_pabrik" placeholder="Masukkan Kode Pabrik" required>
-                    </div>                  
-                  </div>                                                               
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="tanggal">Tanggal</label> 
-                    <div class="col-sm-10">
-                      <input type="date" name="tanggal" value="{{$barangMasuk->tanggal}}" class="form-control" id="tanggal" placeholder="" required>
-                    </div>                  
+                  <label class="col-sm-2 col-form-label" for="kode_pabrik">Kode Pabrik</label> 
+                  <div class="col-sm-10">
+                    <select name="kode_pabrik" id="" class="form-control" required>
+                      <option value="" selected>Pilih Pemasok</option>
+                      @foreach ($pemasok as $item)
+                      @if ($item->kode_pabrik == $barangMasuk->kode_pabrik)
+                        <option value="{{$item->kode_pabrik}}" selected>{{$item->kode_pabrik}}</option>
+                        @continue
+                      @endif
+                          <option value="{{$item->kode_pabrik}}">{{$item->kode_pabrik}}</option>
+                      @endforeach
+                    </select>
                   </div>
+                </div>                                                        
                   <div class="form-group row">
                     <label class="col-sm-2 col-form-label" for="jumlah">Jumlah</label> 
                     <div class="col-sm-10">
+                      <input type="hidden" name="before_jumlah" value="{{$barangMasuk->jumlah}}">
                       <input type="number" name="jumlah" value="{{$barangMasuk->jumlah}}" class="form-control" id="jumlah" placeholder="Masukkan Jumlah" required>
                     </div>                  
                   </div>                                                                                                                                                                                                                                                                                               
@@ -61,6 +65,3 @@
   </div>
   
 @endsection
-
-
-@endpush

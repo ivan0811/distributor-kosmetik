@@ -60,6 +60,15 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('/edit-transaksi/{no_pesanan}', 'TransaksiController@editTransaksi')->name('edit_transaksi');
         Route::patch('/update-transaksi', 'TransaksiController@updateTransaksi')->name('update_transaksi');
         Route::delete('/delete-transaksi/{no_pesanan}', 'TransaksiController@deleteTransaksi')->name('delete_transaksi');         
+        Route::get('/duplicate-transaksi/{no_pesanan}', 'TransaksiController@duplicateTransaksi')->name('duplicate_transaksi');        
+        Route::get('/detail-transaksi/{no_pesanan}', 'TransaksiController@detailTransaksi')->name('detail_transaksi');        
+        Route::post('/print-transaksi', 'TransaksiController@printTransaksi')->name('print_transaksi');
+        Route::prefix('/pembayaran/{no_pesanan}')->group(function(){
+            Route::get('/', 'PembayaranController@pembayaran')->name('pembayaran');
+            Route::get('/create', 'PembayaranController@createPembayaran')->name('create_pembayaran');
+            Route::post('/store', 'PembayaranController@storePembayaran')->name('store_pembayaran');            
+            Route::delete('/delete', 'PembayaranController@deletePembayaran')->name('delete_pembayaran');
+        });      
     });    
     
     //crud pemasok
@@ -70,7 +79,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::get('/edit-pemasok/{kode_pabrik}', 'PemasokController@editPemasok')->name('edit_pemasok');
         Route::patch('/update-pemasok', 'PemasokController@updatePemasok')->name('update_pemasok');
         Route::delete('/delete-pemasok/{kode_pabrik}', 'PemasokController@deletePemasok')->name('delete_pemasok'); 
-    });
+    });    
 
     //crud barang
     Route::prefix('/barang')->group(function(){
@@ -83,9 +92,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         // barang masuk
         Route::get('/create-barang-masuk', 'BarangController@createBarangMasuk')->name('create_barang_masuk');
         Route::post('/store-barang-masuk', 'BarangController@storeBarangMasuk')->name('store_barang_masuk');
-        Route::get('/edit-barang-masuk/{kode_pabrik}', 'BarangController@editBarangMasuk')->name('edit_barang_masuk');
+        Route::get('/edit-barang-masuk/{id}', 'BarangController@editBarangMasuk')->name('edit_barang_masuk');
         Route::patch('/update-barang-masuk', 'BarangController@updateBarangMasuk')->name('update_barang_masuk');
-        Route::delete('/delete-barang-masuk/{kode_pabrik}', 'BarangController@deleteBarangMasuk')->name('delete_barang_masuk');
+        Route::delete('/delete-barang-masuk/{id}', 'BarangController@deleteBarangMasuk')->name('delete_barang_masuk');
         // barang keluar
         Route::get('/create-barang-keluar', 'BarangController@createBarangKeluar')->name('create_barang_keluar');
         Route::post('/store-barang-keluar', 'BarangController@storeBarangKeluar')->name('store_barang_keluar');
@@ -129,6 +138,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
         Route::prefix('/laporan')->group(function(){
             Route::get('/', 'LaporanController@laporan')->name('laporan');
+            Route::get('/laporan-transaksi', 'LaporanController@laporan-transaksi')->name('laporan_transaksi');
         });
     });
     });

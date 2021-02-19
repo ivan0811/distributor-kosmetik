@@ -27,19 +27,7 @@
           <div class="d-flex row">            
             <div class="p-2">
               <a href="{{route('create_transaksi')}}" class="btn btn-custom-success"><span class="fa fa-plus"></span> Tambah Transaksi</a>                                           
-            </div>           
-            @if (\Auth::user()->role_id == 1) 
-            <div class="p-2">              
-              <form action="">
-                <button type="submit" class="btn btn-danger"><span class="fa fa-times"></span> Hapus Semua Transaksi</button>
-              </form>              
-            </div>            
-            <div class="p-2">
-              <form action="">
-                <button type="submit" class="btn btn-info"><span class="fa fa-file-csv"></span> Export CSV Transaksi</button>
-              </form>
-            </div>   
-            @endif                       
+            </div>                             
             <div class="p-2">
               <nav class="pagination-table" aria-label="Page navigation example">
                 <ul class="pagination">
@@ -72,7 +60,10 @@
             @php
                 $no = 1  
               @endphp
-              @foreach ($pesanan as $key => $item)              
+              @foreach ($pesanan as $key => $item)      
+              @php
+                  $status_pembayaran = $pembayaran[$item->no_pesanan]->sortByDesc('created_at')->first()->status_pembayaran
+              @endphp        
             <tr>                                         
                 <th scope="row">{{$no++}}</th>
                 <td>{{$item->no_pesanan}}</td>                
@@ -80,25 +71,32 @@
                 <td>{{$item->sales->nama}}</td>
                 <td>{{$countBarang[$key]->count}}</td>   
                 <td>{{$item->total_harga}}</td>   
-                <td>{{$pembayaran[$key]->status_pembayaran}}</td>  
+                <td>{{$status_pembayaran}}</td>  
                 <td>{{$item->created_at}}</td>                                             
                 <td>                  
-                    <form action="" method="POST" id="delete_user">
+                    <form action="{{route('delete_transaksi', $item->no_pesanan)}}" method="POST" id="delete_user{{$item->no_pesanan}}">
                       {{ csrf_field() }}
                       {{ method_field('DELETE')}}                      
                       <div class="d-flex">
+                        @if ($status_pembayaran == "BELUM LUNAS")
                         <div class="p-1">
-                          <a href="" class="btn-custom-manage btn-success"><span class="fa fa-copy"></span></a>
+                          <a href="{{route('pembayaran', $item->no_pesanan)}}" class="btn-custom-manage btn-custom-info"><span class="fa fa fa-file-invoice-dollar"></span></a>
+                        </div>           
+                        @endif                        
+                        @if ($status_pembayaran == "LUNAS")
+                        <div class="p-1">
+                          <a href="{{route('duplicate_transaksi', $item->no_pesanan)}}" class="btn-custom-manage btn-custom-info"><span class="fa fa-copy"></span></a>
                         </div>                                  
+                        @endif                        
                       <div class="p-1">
-                        <a href="" class="btn-custom-manage btn-custom-info"><span class="fa fa-list"></span></a>
+                        <a href="{{route('detail_transaksi', $item->no_pesanan)}}" class="btn-custom-manage btn-custom-info"><span class="fa fa-list"></span></a>
                       </div>                                  
                       <div class="p-1">
                           <a href="{{route('edit_transaksi', $item->no_pesanan)}}" class="btn-custom-manage btn-custom-warning"><span class="fa fa-edit"></span></a>
                       </div>
                       @if (\Auth::user()->role_id == 1) 
                         <div class="p-1">
-                          <button type="button" class="btn-custom-manage btn-custom-danger delete_confirm" data-id="" data-toggle="modal"><span class="fa fa-times"></span></button>
+                          <button type="button" class="btn-custom-manage btn-custom-danger delete_confirm" data-id="{{$item->no_pesanan}}" data-toggle="modal"><span class="fa fa-times"></span></button>
                       </div>
                       @endif                             
                     </div>                  
@@ -129,7 +127,7 @@
     <script>      
     $('.delete_confirm').click(function(){             
       $('#btn_delete').attr('data-id', $(this).data('id'))    
-      $('#modal_delete_user').modal('show');
+      $('#modal_delete_confirm').modal('show');
     });
       $('#btn_delete').click(function(){                
         $('#delete_user'+$(this).data('id')).submit();

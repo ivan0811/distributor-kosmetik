@@ -11,7 +11,7 @@ class BarangKeluar extends Model
 
     public function barang()
     {
-        return $this->belongsTo('App/Barang');
+        return $this->belongsTo(Barang::class);
     }
     
     public function DetailPesanan()

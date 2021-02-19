@@ -27,6 +27,14 @@
           <div class="p-2 d-inline-flex">
             <a href="{{route('create_barang')}}" class="btn-custom btn-custom-success"><span class="fa fa-plus"></span> Tambah Barang</a>                                           
           </div>                                                            
+          {{-- <div class="p-2">                          
+            <select name="" id="satuan" class="form-control">
+              <option value="">Pilih Satuan</option>
+              @foreach ($satuan as $item)
+                  <option value="{{$item->id}}">{{$item->nama}}</option>
+              @endforeach
+            </select>
+        </div>                                     --}}
           <div class="ml-auto p-2">                          
               <input class="form-control search-box" type="text" placeholder="Search" aria-label="Search">                                                      
           </div>                                    
@@ -38,6 +46,7 @@
           <thead>
             <tr>
               <th scope="col">No</th>
+              {{-- <th scope="col">Pilih</th>        --}}
               <th scope="col">Kode BPOM</th>       
               <th scope="col">Nama Barang</th>              
               <th scope="col">Stok</th>                                           
@@ -55,12 +64,19 @@
             @foreach ($barang as $key => $item)              
             <tr>                                         
                 <th scope="row">{{$no++}}</th>
+                {{-- <td>
+                  <input type="hidden" value="{{$item->id}}" id="barang_id{{$key}}">
+                  <div class="custom-control custom-checkbox mt-0">
+                    <input type="checkbox" class="custom-control-input checkbox-barang" data-id="{{$key}}" id="barang{{$key}}">
+                    <label class="custom-control-label" for="barang{{$key}}"></label>
+                  </div>
+                </td> --}}
                 <td>{{$item->kode_bpom}}</td>         
                 <td>{{$item->nama}}</td>                
                 <td>{{$item->stok}}</td>                
                 <td>{{$item->harga_jual}}</td>
                 <td>{{$item->harga_pabrik}}</td>
-                <td>{{$item->satuan->nama}}</td>
+                <td id="satuan{{$key}}">{{$item->satuan->nama}}</td>
                 <td>{{$item->discount}}</td>                                                        
                 <td>                  
                     <form action="{{route('delete_barang', $item->id)}}" method="POST">
@@ -140,7 +156,7 @@
                 <td>{{date_format($item->created_at, "d/m/Y")}}</td>                                
                 <td>{{$item->jumlah}}</td>                                
                 <td>                  
-                    <form action="{{route('delete_barang_masuk', $item->kode_pabrik)}}" method="POST">
+                    <form action="{{route('delete_barang_masuk', $item->id)}}" method="POST">
                       {{ csrf_field() }}
                       {{ method_field('DELETE')}}                      
                       <div class="d-flex">                                                  
@@ -193,11 +209,12 @@
             </div>                                                                                            
         </li>      
         </ul>                             
-      <div class="custom-card-body-table table-responsive" style="max-height: 440px;">
+      <div class="custom-card-body-table table-responsive">
         <table class="table">
           <thead>
             <tr>
               <th scope="col">No</th>
+              <th scope="col">No Pesanan</th>
               <th scope="col">Nama Barang</th>              
               <th scope="col">Jumlah</th>                                           
               <th scope="col" width="170px">Aksi</th>
@@ -210,18 +227,17 @@
             @foreach ($barangKeluar as $key => $item)              
             <tr>                                         
                 <th scope="row">{{$no++}}</th>
-                <td>{{$item->barang_id}}</td>                
+                <td></td>
+                {{-- <td>{{$item->detailPesanan->pesanan->no_pesanan}}</td> --}}
+                <td>{{$item->barang->nama}}</td>                
                 <td>{{$item->jumlah}}</td>                                                                       
                 <td>                  
-                    <form action="{{route('delete_barang_keluar', $item->id)}}" method="POST" id="form_delete{{$item->id}}">
+                    <form action="{{route('delete_barang_keluar', $item->id)}}" method="POST" id="form_delete">
                       {{ csrf_field() }}
                       {{ method_field('DELETE')}}                      
-                      <div class="d-flex">                                                  
+                      <div class="d-flex">                                                                        
                       <div class="p-1">
-                          <a href="{{route('edit_barang_keluar', $item->id)}}" class="btn btn-custom-warning"><span class="fa fa-edit"></span></a>
-                      </div>
-                      <div class="p-1">
-                          <button type="button" class="btn btn-custom-danger delete_confirm" data-id="{{$item->id}}" data-toggle="modal"><span class="fa fa-trash"></span></button>
+                          <button type="button" class="btn-custom-manage btn-custom-danger delete_confirm" data-toggle="modal"><span class="fa fa-times"></span></button>
                       </div>
                     </div>                  
                     </form>                                                     
@@ -256,5 +272,28 @@
       $('#btn_delete').click(function(){                
         $('#form_delete'+$(this).data('id')).submit();
       });
+
+      
+
+      // $('#satuan').change(function(){
+      //   $.ajax({      
+      //     'type' : 'POST',
+      //     'data' : {
+      //       '_token' : '{{csrf_token()}}',
+      //       'satuan' : $(this).val(),
+      //       'id' : 
+      //     },
+      //     'success' : function(data){
+      //       for (const value of $('.checkbox-barang')) {
+      //         // $('#satuan'+$(value).data('id')+).val(data.satuan);
+      //         // $(value).prop('checked', false);
+
+      //       }
+      //     },
+      //     'error' : function(data){
+      //       console.log(data);
+      //     }
+      //   })
+      // })
     </script>
 @endpush

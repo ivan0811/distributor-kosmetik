@@ -18,11 +18,12 @@ class BarangController extends MessageController
         $barang = barang::all();
         $barangMasuk = barangMasuk::all();
         $barangKeluar = barangKeluar::all();
+        $satuan = Satuan::all();
         $alert = collect();
         if(count(Pemasok::all()) == 0) $alert->push('data pemasok masih kosong');
         if(count(Barang::all()) == 0) $alert->push('data barang masih kosong');
                 
-        return view('barang.barang', compact('barang', 'barangMasuk', 'barangKeluar', 'alert'));
+        return view('barang.barang', compact('barang', 'barangMasuk', 'barangKeluar', 'alert', 'satuan'));
     }
 
     function createBarang(){ 
@@ -95,7 +96,7 @@ class BarangController extends MessageController
        
 
     function editBarang($id){
-        $barang = barang::findOrFail($id);             
+        $barang = barang::findOrFail($id);                                             
         $confirmModal = $this->saveConfirm('barang', route('barang'), 'confirm_modal', 'btn_submit');        
         return view('barang.edit_barang', compact('barang', 'satuan', 'confirmModal'));
     }
@@ -114,6 +115,7 @@ class BarangController extends MessageController
         $barang->nama = $request->nama;        
         $barang->harga_jual = $request->harga_jual;
         $barang->harga_pabrik = $request->harga_pabrik;
+        $barang->stok = $request->stok;
         $barang->discount = $request->discount / 100;          
         $barang->save();
 
@@ -155,26 +157,26 @@ class BarangController extends MessageController
             $barang = barang::findOrFail($value);
             $barang->stok = $barang->stok + $request->jumlah[$key];
             $barang->save();
-        }                   
+        }
+                           
         
         $toast = $this->successToast('data barang berhasil di tambahkan');                                        
         return redirect()->route('barang')->with('status', $toast);
+    }
 
-
-        function editBarangMasuk($barang_id){
-            $barangMasuk = barangMasuk::findOrFail($barang_id);      
+        function editBarangMasuk($id){
+            $barangMasuk = barangMasuk::findOrFail($id);      
+            $pemasok = pemasok::all();
             $confirmModal = $this->saveConfirm('barang', route('barang'), 'confirm_modal', 'btn_submit');        
-            return view('barang.edit_barang_masuk', compact('barang', 'confirmModal'));
+            return view('barang.edit_barang_masuk', compact('barangMasuk', 'confirmModal', 'pemasok'));
         }
 
-        function updateBarangMasuk(Request $request){
-            $barangMasuk = barangMasuk::findOrFail($request->kode_pabrik);   
-            $barangMasuk->barang_id = $request->barang_id;
+        function updateBarangMasuk(Request $request){            
+            $barangMasuk = barangMasuk::findOrFail($request->barang_id);              
             $barangMasuk->kode_pabrik = $request->kode_pabrik;
-            $barangMasuk->tanggal = $request->tanggal;
             $barangMasuk->jumlah = $request->jumlah;          
-            $barangMasuk->save();
-    
+            $barangMasuk->save();                    
+                        
             $toast = $this->successToast('data barang berhasil di perbaharui');                                
             return redirect()->route('barang')->with('status', $toast);  
         }
@@ -183,8 +185,7 @@ class BarangController extends MessageController
             barangMasuk::findOrFail($kode_pabrik)->delete();
             $toast = $this->successToast('data barang masuk berhasil di hapus');                                
             return redirect()->back()->with('status', $toast);
-        }
-    }
+        }    
 
 
     // barang keluar

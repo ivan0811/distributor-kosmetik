@@ -52,7 +52,14 @@
                         <input type="number" name="harga_jual" value="{{$barang->harga_jual}}" class="form-control" id="harga_jual" placeholder="Masukkan Harga Jual" required>
                       </div>
                     </div>  
-                                   
+                            
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label" for="harga_jual">Stok</label> 
+                      <div class="col-sm-2">
+                        <input type="number" name="stok" value="{{$barang->stok}}" class="form-control"  placeholder="Masukkan Jumlah Stok" required>
+                      </div>
+                    </div>  
+
                     <div class="form-group row">
                       <label class="col-sm-2 col-form-label" for="discount">Discount</label> 
                       <div class="input-group col-sm-2">
