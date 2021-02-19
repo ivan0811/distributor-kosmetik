@@ -78,7 +78,7 @@
                 </div>   
                 <div class="col-md-6 mb-3">
                   <label for="">Tanggal Pembayaran</label>
-                  <input type="text" value="{{$pembayaran->created_at}}" class="form-control-plaintext" id="pay_date" name="tanggal_pembayaran" readonly> 
+                  <input type="text" value="{{$pembayaran->updated_at}}" class="form-control-plaintext" id="pay_date" name="tanggal_pembayaran" readonly> 
                 </div>   
                 <div class="col-md-6 mb-3">
                   <label for="">Metode Pembayaran</label>

@@ -53,7 +53,7 @@
                 </div>                          
                 <div class="col-md-12 mb-3">
                   <label for="">Tanggal Transaksi</label>
-                  <input type="datetime-local" class="form-control" name="tanggal_transaksi" id="transaction_date"> 
+                  <input type="datetime-local" value="{{$transaksi_date}}" class="form-control" name="tanggal_transaksi" id="transaction_date"> 
                 </div>                            
               </div>                                                                                                                                                                     
                 </div>                                                                                                                                                                               
@@ -88,7 +88,7 @@
                 </div>   
                 <div class="col-md-6 mb-3">
                   <label for="">Tanggal Pembayaran</label>
-                  <input type="datetime-local" class="form-control" id="pay_date" name="tanggal_pembayaran"> 
+                  <input type="datetime-local" value="{{$pembayaran_date}}" class="form-control" id="pay_date" name="tanggal_pembayaran"> 
                 </div>   
                 <div class="col-md-6 mb-3">
                   <label for="">Metode Pembayaran</label>

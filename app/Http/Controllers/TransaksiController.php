@@ -117,7 +117,7 @@ class TransaksiController extends MessageController
         return redirect()->route('transaksi')->with('status', $toast);          
     }
 
-    function editTransaksi($no_pesanan){
+    function editTransaksi($no_pesanan){        
         $sales = Sales::all();    
         $rekening = Rekening::all();              
         $pesanan = pesanan::where('no_pesanan', $no_pesanan)->first();
@@ -129,12 +129,25 @@ class TransaksiController extends MessageController
                     ->select('barang.id as key', 'barang.id as barang_id', 'barang.nama as nama_barang', 'barang.stok', 'barang.harga_jual', 'barang.discount', 'satuan.nama as satuan')
                     ->get();
         $pembayaran = Pembayaran::where('no_pesanan', $no_pesanan)->latest()->first();
-        $dataBarang = json_encode($dataBarang);              
+        $dataBarang = json_encode($dataBarang);                  
+
+            // $transaksi_date = $pembayaran->updated_at;
+            // $pembayaran_date = $pembayaran->updated_at;
+
+        $transaksi_date = Carbon::parse($pesanan->updated_at)->format('Y-m-d');
+        $pembayaran_date = Carbon::parse($pembayaran->updated_at)->format('Y-m-d');
+
+        $transaksi_time = Carbon::parse($pesanan->updated_at)->format('h:i:s');
+        $pembayaran_time = Carbon::parse($pembayaran->updated_at)->format('h:i:s');
+
+        $transaksi_date = $transaksi_date.'T'.$transaksi_time;
+        $pembayaran_date = $pembayaran_date.'T'.$pembayaran_time;
+        // print_r($pembayaran_date);
         
         $total_discount = DetailPesanan::select(DB::raw('sum(discount) as result'))->where('no_pesanan', $no_pesanan)->get();
         $total_discount = json_decode($total_discount[0]->result) * 100;        
         
-        return view('transaksi.edit_transaksi', compact('transaksi', 'sales', 'barang', 'pesanan', 'detailPesanan', 'rekening', 'dataBarang', 'pembayaran', 'total_discount'));
+        return view('transaksi.edit_transaksi', compact('transaksi', 'sales', 'barang', 'pesanan', 'detailPesanan', 'rekening', 'dataBarang', 'pembayaran', 'total_discount', 'transaksi_date', 'pembayaran_date'));
     }
 
     function updateTransaksi(Request $request){
