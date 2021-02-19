@@ -30,7 +30,7 @@
                   <div class="row">
                     <div class="col-12">                                                                                        
                         @if (\Auth::user()->id == 1)
-                        <div class="img-profile">   
+                        <div class="btn-upload-img-profile">   
                           <label for="upload_user_image">
                             <span class="fa fa-camera"></span>                            
                             <img src="{{asset('template/img/user1.svg')}}" alt="" class="upload-image-user img-fluid" id="user_pic">

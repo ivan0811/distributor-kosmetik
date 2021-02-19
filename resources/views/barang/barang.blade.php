@@ -214,7 +214,7 @@
           <thead>
             <tr>
               <th scope="col">No</th>
-              <th scope="col">No Pesanan</th>
+              <th scope="col">No Pesanan</th>              
               <th scope="col">Nama Barang</th>              
               <th scope="col">Jumlah</th>                                           
               <th scope="col" width="170px">Aksi</th>
