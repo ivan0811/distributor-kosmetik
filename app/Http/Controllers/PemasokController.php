@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\pemasok;
 use App\Rekening;
 
+/*
+    NIM : 10119026
+    Nama : Muhammad Khatami
+    Kelas : IF1
+*/
+
 class PemasokController extends APIController
 {
     function pemasok(){

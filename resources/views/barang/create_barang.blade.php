@@ -5,7 +5,12 @@
 @section('header')
     Create Barang
 @endsection
-@section('content')      
+@section('content')
+{{--
+   NIM : 10119026
+  Nama : Muhammad Khatami
+  Kelas : IF1 
+--}}      
 <form action="{{route('store_barang')}}" id="form_barang" method="POST" class="col-sm-12">                        
     <div class="custom-card">                  
       <div class="custom-card-header text-clear">

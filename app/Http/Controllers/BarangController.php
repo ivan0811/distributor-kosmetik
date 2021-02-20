@@ -11,6 +11,13 @@ use App\Pemasok;
 use Auth;
 use Carbon\Carbon;
 
+
+/*
+    NIM : 10119026
+    Nama : Muhammad Khatami
+    Kelas : IF1
+*/
+
 class BarangController extends MessageController
 {
     // barang

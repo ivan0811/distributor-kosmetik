@@ -4,6 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/*
+    NIM : 10119026
+    Nama : Muhammad Khatami
+    Kelas : IF1
+*/
+
 class BarangMasuk extends Model
 {
     protected $table = 'barang_masuk';

@@ -5,7 +5,12 @@
 @section('header')
     Edit Barang Masuk
 @endsection
-@section('content')                         
+@section('content') 
+{{--
+   NIM : 10119026
+  Nama : Muhammad Khatami
+  Kelas : IF1 
+--}}                        
   <div class="col-md-12">
     <div class="custom-card">                  
       <div class="custom-card-header text-clear">

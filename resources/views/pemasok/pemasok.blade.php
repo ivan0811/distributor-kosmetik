@@ -6,6 +6,11 @@
     Pemasok
 @endsection
 @section('content')
+{{--
+   NIM : 10119026
+  Nama : Muhammad Khatami
+  Kelas : IF1 
+--}}
 <div class="col-sm-12">
     <div class="custom-card">                  
       <div class="custom-card-header with-tools">                                                                  

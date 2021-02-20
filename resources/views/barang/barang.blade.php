@@ -6,6 +6,11 @@
     Barang
 @endsection
 @section('content')
+{{--
+   NIM : 10119026
+  Nama : Muhammad Khatami
+  Kelas : IF1 
+--}}
 @if (count($alert) > 0)
 <div class="col-12">
   <div class="alert alert-danger" role="alert">
