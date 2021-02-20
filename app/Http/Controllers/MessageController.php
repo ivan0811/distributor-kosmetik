@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+/*
+    NIM : 10119003
+    Nama : Ivan Faathirza
+    Kelas : IF1
+*/
 class MessageController extends Controller
 {
     private function toast($icon, $message){

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('template/css/Chart.min.css')}}">
     <link rel="stylesheet" href="{{asset('template/css/bootstrap-select.min.css')}}">
 </head>
+
 <style>
   .navbar-nav{
     flex-direction: row;
@@ -28,6 +29,11 @@
     }
 </style>
 <body class="wrap">         
+  {{--
+   NIM : 10119003
+  Nama : Ivan Faathirza
+  Kelas : IF1 
+--}}
     <aside class="main-side bg-side">
         <div class="container">
           <div class="slide-button d-flex">

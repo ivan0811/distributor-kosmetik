@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use PDF;
 
+/*
+    NIM : 10119003
+    Nama : Ivan Faathirza
+    Kelas : IF1
+*/
+
 class TransaksiController extends MessageController
 {
     function transaksi(){        

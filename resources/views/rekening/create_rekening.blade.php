@@ -5,7 +5,8 @@
 @section('header')
     Create Rekening
 @endsection
-@section('content')                         
+@section('content')    
+                     
   <div class="col-md-12">
     <div class="custom-card">                  
       <div class="custom-card-header text-clear">

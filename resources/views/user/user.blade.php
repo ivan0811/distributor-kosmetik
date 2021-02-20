@@ -6,6 +6,11 @@
     User
 @endsection
 @section('content')
+{{--
+   NIM : 10119003
+  Nama : Ivan Faathirza
+  Kelas : IF1 
+--}}
 <div class="col-sm-12">
     <div class="custom-card">                  
       <div class="custom-card-header with-tools">                                                                  

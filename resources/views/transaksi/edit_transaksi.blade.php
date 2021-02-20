@@ -6,6 +6,11 @@
     Transaksi
 @endsection
 @section('content')
+{{--
+   NIM : 10119003
+  Nama : Ivan Faathirza
+  Kelas : IF1 
+--}}
 @if ($errors->any())
 <div class="col-12">
           <div class="alert alert-danger">

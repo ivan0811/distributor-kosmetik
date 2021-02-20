@@ -5,7 +5,12 @@
 @section('header')
     Create User
 @endsection
-@section('content')                         
+@section('content')     
+{{--
+   NIM : 10119003
+  Nama : Ivan Faathirza
+  Kelas : IF1 
+--}}                    
   <div class="col-md-12">
     <div class="custom-card">                  
       <div class="custom-card-header text-clear">
@@ -19,7 +24,7 @@
                   @endforeach
               </ul>
           </div>
-      @endif                       
+      @endif                             
       <div class="custom-card-body">                                                                  
           <form action="{{route('store_user')}}" id="form_user" method="POST">       
             {{ csrf_field() }}

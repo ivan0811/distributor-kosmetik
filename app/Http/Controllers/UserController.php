@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use Storage;
 use File;
+
+/*
+    NIM : 10119003
+    Nama : Ivan Faathirza
+    Kelas : IF1
+*/
     
 class UserController extends APIController
 {

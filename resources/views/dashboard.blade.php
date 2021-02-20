@@ -6,8 +6,12 @@
     Dashboard
 @endsection
 @section('content')
-{{-- Selamat Datang kembali {{\Auth::user()->username}} --}}
-                      
+{{--
+   NIM : 10119003
+  Nama : Ivan Faathirza
+  Kelas : IF1 
+--}}
+                
 <div class="col-lg-6">
     <div class="custom-card">                  
         <div class="custom-card-header">

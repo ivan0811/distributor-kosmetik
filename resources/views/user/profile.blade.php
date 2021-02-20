@@ -5,7 +5,12 @@
 @section('header')
     Menampilkan User
 @endsection
-@section('content')                         
+@section('content')    
+{{--
+   NIM : 10119003
+  Nama : Ivan Faathirza
+  Kelas : IF1 
+--}}                     
 <div class="col-lg-12">
     <div class="custom-card">                  
       <div class="custom-card-header">

@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Pembayaran;
 
+/*
+    NIM : 10119003
+    Nama : Ivan Faathirza
+    Kelas : IF1
+*/
+
 class PembayaranController extends TransaksiController
 {
     function pembayaran($no_pesanan){        

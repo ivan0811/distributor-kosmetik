@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+/*
+    NIM : 10119003
+    Nama : Ivan Faathirza
+    Kelas : IF1
+*/
+
 class APIController extends MessageController
 {
     protected $getProvinsi;  
-    protected $getKabupaten;      
-    
+    protected $getKabupaten;          
     public function __construct()
     {
         

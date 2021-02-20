@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Rekening;
 use App\Bank;
 
+/*
+    NIM : 10119003
+    Nama : Ivan Faathirza
+    Kelas : IF1
+*/
+
 class RekeningController extends MessageController
 {
     function rekening(){

@@ -1,3 +1,8 @@
+/*
+    NIM : 10119003
+    Nama : Ivan Faathirza
+    Kelas : IF1
+*/
 var toggle_side = false;
 var screenWidth = $(window).width();
 var screenHeight = $(window).height();

@@ -7,7 +7,11 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Pembayaran;
-
+/*
+    NIM : 10119003
+    Nama : Ivan Faathirza
+    Kelas : IF1
+*/
 class MainController extends Controller
 {            
    function dashboard(){

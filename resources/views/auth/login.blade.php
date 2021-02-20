@@ -13,6 +13,11 @@
     }
 </style>
 <body class="login-page">    
+    {{--
+   NIM : 10119003
+  Nama : Ivan Faathirza
+  Kelas : IF1 
+--}}
     <div class="login-container">
         <div class="login-box">            
             <!-- <img src="/img/logo.svg" alt="" width="40px">                 -->
