@@ -1,3 +1,6 @@
+/* NAMA : FIONA AVILA PUTRI
+   NIM  : 10119013 */
+
 @extends('navigation.navigation')
 @section('title')
     Bank    
